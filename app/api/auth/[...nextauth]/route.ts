@@ -22,7 +22,7 @@ export const authOptions: NextAuthOptions = {
           .single();
 
         if (error || !user) {
-          console.error(JSON.stringify({ event: "AuthenticationFailure", reason: error?.message || "User not found", email: credentials.email }));
+          console.error(JSON.stringify({ event: "AuthenticationFailure", reason: error ?? "User not found", email: credentials.email }));
           return null;
         }
 

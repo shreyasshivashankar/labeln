@@ -1,8 +1,17 @@
-// This is a mock Supabase client for demonstration purposes.
-// In a real application, you would use the official Supabase client.
-import { db, Measurements } from './db';
+// Mock Supabase client for development. Wire up the real client when SUPABASE_URL is set.
+import { db, type Measurements } from './db';
 
-// This mock client mimics the Supabase API.
+type Ok<T> = { data: T; error: null };
+type Err = { data: null; error: string };
+type Result<T> = Ok<T> | Err;
+
+function ok<T>(data: T): Ok<T> {
+  return { data, error: null };
+}
+function err(message: string): Err {
+  return { data: null, error: message };
+}
+
 export const supabase = {
   from: (tableName: string) => {
     if (tableName === 'users') {
@@ -11,38 +20,59 @@ export const supabase = {
           eq: (column: string, value: string) => {
             if (column === 'email') {
               const user = db.users.find(value);
-              return { data: user ? [user] : null, error: null };
+              const arr = user ? [user] : [];
+              return {
+                ...ok(arr.length > 0 ? arr : null),
+                single(): Result<(typeof arr)[number]> {
+                  return user ? ok(user) : err('Not found');
+                },
+              };
             }
-            return { data: null, error: 'Not implemented' };
-          }
-        })
+            return {
+              ...err('Not implemented'),
+              single: () => err('Not implemented'),
+            };
+          },
+        }),
       };
     }
+
     if (tableName === 'measurements') {
       return {
         select: (_columns: string) => ({
           eq: (column: string, value: string) => {
             if (column === 'user_id') {
-              const measurements = db.measurements.get(value);
-              return { data: measurements ? [measurements] : null, error: null };
+              const m = db.measurements.get(value);
+              return {
+                ...ok(m ? [m] : null),
+                single(): Result<Measurements> {
+                  return m ? ok(m) : err('Not found');
+                },
+              };
             }
-            return { data: null, error: 'Not implemented' };
-          }
+            return {
+              ...err('Not implemented'),
+              single: () => err('Not implemented'),
+            };
+          },
         }),
         update: (newData: Measurements) => ({
           eq: (column: string, value: string) => {
             if (column === 'user_id') {
               db.measurements.update(value, newData);
-              return { data: [newData], error: null };
+              return ok([newData]);
             }
-            return { data: null, error: 'Not implemented' };
-          }
-        })
+            return err('Not implemented');
+          },
+        }),
       };
     }
+
     return {
-        select: () => ({ eq: () => ({ data: null, error: 'Table not found' }) }),
-        update: () => ({ eq: () => ({ data: null, error: 'Table not found' }) }),
+      select: () => ({
+        eq: () => ({ ...err('Table not found'), single: () => err('Table not found') }),
+      }),
+      update: () => ({ eq: () => err('Table not found') }),
     };
-  }
+  },
 };

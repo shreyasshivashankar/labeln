@@ -39,7 +39,11 @@ function isRateLimited(key: string): boolean {
 export function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
-  if (pathname.startsWith('/api/auth') || pathname.startsWith('/api/webhooks/shopify')) {
+  if (
+    pathname.startsWith('/api/auth') ||
+    pathname.startsWith('/api/webhooks') ||
+    pathname === '/api/revalidate'
+  ) {
     const clientKey = `ratelimit:${getClientIdentifier(request)}:${pathname}`;
     if (isRateLimited(clientKey)) {
       return NextResponse.json(
@@ -53,5 +57,5 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/api/auth/:path*', '/api/revalidate'],
+  matcher: ['/api/auth/:path*', '/api/revalidate', '/api/webhooks/:path*'],
 };

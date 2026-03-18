@@ -1,32 +1,28 @@
-import { getServerSession } from "next-auth/next"
-import { authOptions } from "../auth/[...nextauth]/route"
-import { supabase } from "../../../lib/supabaseClient" // Using the mock client
-import { NextResponse } from "next/server"
+import { getServerSession } from 'next-auth/next';
+import { authOptions } from '../auth/[...nextauth]/route';
+import { supabase } from '../../../lib/supabaseClient';
+import { NextResponse } from 'next/server';
 
-export async function GET() { // Removed req
+export async function GET() {
   const session: { user?: { id?: string } } | null = await getServerSession(authOptions);
 
-  if (!session || !session.user || !session.user.id) {
-    return new NextResponse(JSON.stringify({ error: "Unauthorized" }), {
-      status: 401,
-      headers: { "Content-Type": "application/json" },
-    });
+  if (!session?.user?.id) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const { data: measurements, error } = await supabase
+  const { data, error } = await supabase
     .from('measurements')
     .select('*')
     .eq('user_id', session.user.id);
 
-  if (error || !measurements || measurements.length === 0) {
-    return new NextResponse(JSON.stringify({ error: "Measurements not found" }), {
-      status: 404,
-      headers: { "Content-Type": "application/json" },
-    });
+  if (error || !data || data.length === 0) {
+    return NextResponse.json({ error: 'Measurements not found' }, { status: 404 });
   }
 
-  return new NextResponse(JSON.stringify(measurements[0]), {
-    status: 200,
-    headers: { "Content-Type": "application/json" },
-  });
+  const first = data[0];
+  if (!first) {
+    return NextResponse.json({ error: 'Measurements not found' }, { status: 404 });
+  }
+
+  return NextResponse.json(first);
 }

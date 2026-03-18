@@ -1,6 +1,6 @@
 /**
  * Shopify Storefront API client.
- * Uses SHOPIFY_STOREFRONT_ACCESS_TOKEN - server-only, never exposed to client.
+ * SHOPIFY_STOREFRONT_ACCESS_TOKEN is server-only — never exposed to client bundles.
  */
 
 import type { ShopifyCollection, ShopifyProduct } from '@/types/shopify';
@@ -43,6 +43,8 @@ export async function shopifyFetch<T>(query: string, variables?: Record<string, 
 
   return json.data;
 }
+
+// ─── Queries ──────────────────────────────────────────────────────────────────
 
 const productByHandleQuery = `
   query ProductByHandle($handle: String!) {
@@ -111,6 +113,35 @@ const collectionsQuery = `
   }
 `;
 
+const collectionByHandleQuery = `
+  query CollectionByHandle($handle: String!, $first: Int!) {
+    collection(handle: $handle) {
+      id
+      handle
+      title
+      description
+      image { url altText }
+      products(first: $first) {
+        edges {
+          node {
+            id
+            handle
+            title
+            priceRange {
+              minVariantPrice { amount currencyCode }
+            }
+            images(first: 1) {
+              edges { node { url altText } }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+// ─── Fetchers ─────────────────────────────────────────────────────────────────
+
 export async function getProductByHandle(handle: string) {
   const data = await shopifyFetch<{ product: ShopifyProduct | null }>(productByHandleQuery, {
     handle,
@@ -130,4 +161,22 @@ export async function getCollections(first = 10) {
     collections: { edges: Array<{ node: ShopifyCollection }> };
   }>(collectionsQuery, { first });
   return data.collections.edges.map((e) => e.node);
+}
+
+export async function getCollectionByHandle(handle: string, productsFirst = 20) {
+  const data = await shopifyFetch<{
+    collection:
+      | (ShopifyCollection & {
+          description: string;
+          products: { edges: Array<{ node: ShopifyProduct }> };
+        })
+      | null;
+  }>(collectionByHandleQuery, { handle, first: productsFirst });
+
+  if (!data.collection) return null;
+
+  return {
+    collection: data.collection,
+    products: data.collection.products.edges.map((e) => e.node),
+  };
 }

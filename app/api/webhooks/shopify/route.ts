@@ -31,10 +31,10 @@ async function handleProductsUpdate(body: { id?: string; admin_graphql_api_id?: 
   if (productId) {
     const gid = typeof productId === 'string' ? productId : String(productId);
     const numericId = gid.replace(/\D/g, '');
-    revalidateTag(`product-${numericId}`);
-    revalidateTag('products');
+    revalidateTag(`product-${numericId}`, 'max');
+    revalidateTag('products', 'max');
   }
-  revalidateTag('shopify');
+  revalidateTag('shopify', 'max');
 }
 
 async function handleOrderCreate(body: Record<string, unknown>) {

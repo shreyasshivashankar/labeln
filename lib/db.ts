@@ -1,5 +1,4 @@
-// A simple in-memory database for demonstration purposes.
-// In a real application, you would use a proper database.
+// In-memory database for development. In production, use Supabase (see supabase/migrations/).
 
 export interface User {
   id: string;
@@ -11,10 +10,21 @@ export interface User {
 }
 
 export interface Measurements {
-  bust: number;
-  waist: number;
-  hips: number;
-  // Add more measurement fields as needed
+  // Upper body
+  bust?: number;
+  waist?: number;
+  hips?: number;
+  shoulder?: number;
+  sleeveLength?: number;
+  // Lower body
+  height?: number;
+  inseam?: number;
+  // Garment-specific lengths
+  blouseLength?: number;
+  lehenggaLength?: number;
+  anarkaliLength?: number;
+  // Freeform notes set by team
+  notes?: string;
 }
 
 const users: User[] = [
@@ -28,26 +38,29 @@ const users: User[] = [
       bust: 34,
       waist: 28,
       hips: 36,
+      shoulder: 14,
+      sleeveLength: 24,
+      height: 64,
+      blouseLength: 15,
     },
   },
 ];
 
-// Functions to interact with the database
 export const db = {
   users: {
-    find: (email: string) => users.find(u => u.email === email),
-    findById: (id: string) => users.find(u => u.id === id),
+    find: (email: string) => users.find((u) => u.email === email),
+    findById: (id: string) => users.find((u) => u.id === id),
   },
   measurements: {
     get: (userId: string) => {
       const user = db.users.findById(userId);
-      return user?.measurements || null;
+      return user?.measurements ?? null;
     },
     update: (userId: string, newMeasurements: Measurements) => {
       const user = db.users.findById(userId);
       if (user) {
         user.measurements = newMeasurements;
       }
-    }
-  }
+    },
+  },
 };
