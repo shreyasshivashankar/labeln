@@ -6,6 +6,7 @@ export interface User {
   email: string;
   password?: string;
   name: string;
+  shopify_customer_id?: string | null;
   measurements?: Measurements;
 }
 
@@ -17,16 +18,17 @@ export interface Measurements {
 }
 
 const users: User[] = [
-  { 
-    id: '1', 
-    email: 'user@example.com', 
-    password: 'password', 
+  {
+    id: '1',
+    email: 'user@example.com',
+    password: 'password',
     name: 'Test User',
+    shopify_customer_id: null,
     measurements: {
       bust: 34,
       waist: 28,
       hips: 36,
-    }
+    },
   },
 ];
 

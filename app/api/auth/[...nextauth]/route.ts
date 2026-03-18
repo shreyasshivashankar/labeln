@@ -15,21 +15,23 @@ export const authOptions: NextAuthOptions = {
           return null;
         }
 
-        const { data: users, error } = await supabase
+        const { data: user, error } = await supabase
           .from('users')
           .select('*')
-          .eq('email', credentials.email);
+          .eq('email', credentials.email)
+          .single();
 
-        if (error || !users || users.length === 0) {
+        if (error || !user) {
+          console.error(JSON.stringify({ event: "AuthenticationFailure", reason: error?.message || "User not found", email: credentials.email }));
           return null;
         }
-        
-        const user = users[0];
 
         // For a real app, you'd use a hashing library like bcrypt to compare passwords
         if ('password' in user && user.password === credentials.password) {
-          return { id: user.id, name: user.name, email: user.email };
+          console.info(JSON.stringify({ event: "AuthenticationSuccess", userId: user.id }));
+          return { id: user.id, name: user.name, email: user.email, shopifyCustomerId: user.shopify_customer_id };
         } else {
+          console.warn(JSON.stringify({ event: "AuthenticationFailure", reason: "Invalid password", email: credentials.email }));
           return null;
         }
       }
@@ -43,12 +45,14 @@ export const authOptions: NextAuthOptions = {
     async session({ session, token }) {
       if (token && session.user) {
         session.user.id = token.id as string;
+        Object.assign(session.user, { shopifyCustomerId: token.shopifyCustomerId });
       }
       return session;
     },
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
+        token.shopifyCustomerId = ('shopifyCustomerId' in user) ? user.shopifyCustomerId : null;
       }
       return token;
     }
