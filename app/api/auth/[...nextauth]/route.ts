@@ -27,7 +27,7 @@ export const authOptions: NextAuthOptions = {
         const user = users[0];
 
         // For a real app, you'd use a hashing library like bcrypt to compare passwords
-        if (user.password === credentials.password) {
+        if ('password' in user && user.password === credentials.password) {
           return { id: user.id, name: user.name, email: user.email };
         } else {
           return null;
