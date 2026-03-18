@@ -1,14 +1,7 @@
-# Label N - South Asian Clothing Brand Website
+# Label N
 
-This is a modern, headless e-commerce website for the South Asian clothing brand, Label N. It is built with Next.js, and uses Shopify for e-commerce functionality and Supabase for user data and custom measurements.
+Custom fits & RTW | South asian roots, global style
 
-## Key Features
-
-*   **Modern UI/UX:** A new, visually appealing design inspired by high-end fashion brands.
-*   **Headless Architecture:** The frontend is decoupled from the Shopify backend, allowing for greater design flexibility.
-*   **Custom Measurements:** A feature for clients to have their custom measurements taken and stored with their profile.
-*   **User Authentication:** A secure authentication system for clients to access their profiles.
-*   **Optimized for Production:** The application is architected and configured for a secure and scalable production deployment on Vercel.
 
 ## Technology Stack
 
