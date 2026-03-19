@@ -81,6 +81,7 @@ export const BEST_SELLERS_HANDLE = 'best-sellers';
 
 /** Footer shop links — update when collections change */
 export const FOOTER_SHOP_LINKS = [
+  { label: 'Shop All', href: '/collections' },
   { label: 'The Corset Core', href: '/collections/corsets' },
   { label: 'Drape Theory', href: '/collections/redefined-drapes-the-contemporary-edit' },
   { label: 'Layered Fits', href: '/collections/layered-fits' },

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { getCollections } from '@/lib/shopify';
 import { mockCollections } from '@/lib/mock-data';
 import CollectionCard from '@/app/components/CollectionCard';
@@ -40,6 +41,17 @@ export default async function CollectionsPage() {
             </p>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {/* Shop All — always first */}
+              <Link href="/collections/all" className="group block">
+                <div className="relative w-full aspect-[3/4] overflow-hidden bg-primary">
+                  <div className="absolute inset-0 group-hover:bg-black/10 transition-colors duration-500" />
+                  <div className="absolute inset-0 flex items-end p-6 md:p-8">
+                    <h3 className="text-white font-serif text-2xl md:text-3xl font-light tracking-wide">
+                      Shop All
+                    </h3>
+                  </div>
+                </div>
+              </Link>
               {collections.map((collection) => (
                 <CollectionCard key={collection.id} collection={collection} />
               ))}
