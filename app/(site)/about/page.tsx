@@ -57,19 +57,19 @@ export default function AboutPage() {
         <div className="max-w-5xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 text-center">
             <div>
-              <p className="font-serif text-4xl font-light mb-3">Pret</p>
+              <p className="font-serif text-2xl sm:text-4xl font-light mb-3">Pret</p>
               <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-text-secondary">
                 Ready to Wear
               </p>
             </div>
             <div>
-              <p className="font-serif text-4xl font-light mb-3">Couture</p>
+              <p className="font-serif text-2xl sm:text-4xl font-light mb-3">Couture</p>
               <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-text-secondary">
                 Bespoke Craftsmanship
               </p>
             </div>
             <div>
-              <p className="font-serif text-4xl font-light mb-3">Made to Measure</p>
+              <p className="font-serif text-2xl sm:text-4xl font-light mb-3">Made to Measure</p>
               <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-text-secondary">
                 Tailored for You
               </p>
@@ -85,7 +85,7 @@ export default function AboutPage() {
             <p className="text-[11px] font-medium uppercase tracking-[0.3em] text-secondary mb-6">
               A Note from Us
             </p>
-            <h2 className="font-serif text-3xl md:text-4xl font-light">From Our Hearts to Yours</h2>
+            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-light">From Our Hearts to Yours</h2>
           </div>
 
           <div className="space-y-6 text-text-secondary text-sm leading-[1.9] italic">
@@ -130,7 +130,7 @@ export default function AboutPage() {
       {/* CTA */}
       <section className="bg-surface py-14 md:py-20">
         <div className="max-w-2xl mx-auto px-6 text-center">
-          <h2 className="font-serif text-3xl md:text-4xl font-light mb-10">
+          <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-light mb-10">
             Let&apos;s Create Something Beautiful
           </h2>
           <Link

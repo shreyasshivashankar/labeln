@@ -40,7 +40,7 @@ export default async function CollectionPage({
           >
             &larr; All Collections
           </Link>
-          <h1 className="font-serif text-5xl md:text-6xl font-light">{collection.title}</h1>
+          <h1 className="font-serif text-3xl sm:text-5xl md:text-6xl font-light">{collection.title}</h1>
           {collection.description && (
             <p className="mt-6 text-text-secondary text-sm max-w-md mx-auto leading-relaxed">
               {collection.description}

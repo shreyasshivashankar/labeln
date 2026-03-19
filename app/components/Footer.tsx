@@ -9,7 +9,7 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-5 gap-12 md:gap-8">
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
-            <Link href="/" className="font-logo text-xl tracking-[0.15em] font-normal">
+            <Link href="/" className="font-logo text-xl tracking-[0.15em] font-normal whitespace-nowrap">
               LABEL N
             </Link>
           </div>

@@ -48,7 +48,7 @@ export default function ProductDetails({ product }: Props) {
         </p>
       )}
 
-      <h1 className="font-serif text-3xl md:text-4xl font-light">{product.title}</h1>
+      <h1 className="font-serif text-2xl sm:text-3xl md:text-4xl font-light">{product.title}</h1>
       <p className="mt-4 text-lg text-text-secondary">{formattedPrice}</p>
 
       {/* Options (Size, Color, etc.) */}

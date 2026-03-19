@@ -13,7 +13,7 @@ export default function ReturnsPage() {
           <p className="text-[11px] font-medium uppercase tracking-[0.3em] text-secondary mb-6">
             Policies
           </p>
-          <h1 className="font-serif text-5xl md:text-6xl font-light">Returns &amp; Refunds</h1>
+          <h1 className="font-serif text-3xl sm:text-5xl md:text-6xl font-light">Returns &amp; Refunds</h1>
         </div>
       </section>
 

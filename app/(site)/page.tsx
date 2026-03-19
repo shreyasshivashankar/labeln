@@ -111,7 +111,7 @@ export default async function Home() {
           <p className="text-[11px] font-medium uppercase tracking-[0.3em] text-secondary mb-6">
             Bespoke Experience
           </p>
-          <h2 className="font-serif text-4xl md:text-5xl font-light mb-6">Made for You, Precisely</h2>
+          <h2 className="font-serif text-2xl sm:text-4xl md:text-5xl font-light mb-6">Made for You, Precisely</h2>
           <p className="text-text-secondary text-sm md:text-base leading-relaxed max-w-2xl mx-auto mb-12">
             Every Label N garment is crafted to your exact measurements. Book a virtual consultation
             and our designers will guide you through a personal fitting over a video call.
@@ -134,7 +134,7 @@ export default async function Home() {
             <p className="text-[11px] font-medium uppercase tracking-[0.3em] text-secondary mb-6">
               Our Story
             </p>
-            <h2 className="font-serif text-4xl md:text-5xl font-light mb-6">
+            <h2 className="font-serif text-2xl sm:text-4xl md:text-5xl font-light mb-6">
               South Asian Roots,<br />Global Style
             </h2>
             <p className="text-text-secondary text-sm leading-relaxed mb-10 max-w-lg">

@@ -130,7 +130,7 @@ export default function Header() {
           {/* Center logo */}
           <div className="flex justify-center">
             <Link href="/">
-              <span className="font-logo text-2xl lg:text-3xl tracking-[0.15em] font-normal">
+              <span className="font-logo text-xl sm:text-2xl lg:text-3xl tracking-[0.15em] font-normal whitespace-nowrap">
                 LABEL N
               </span>
             </Link>

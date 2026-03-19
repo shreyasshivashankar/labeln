@@ -19,7 +19,7 @@ export default async function CollectionsPage() {
           <p className="text-[11px] font-medium uppercase tracking-[0.3em] text-secondary mb-6">
             Explore
           </p>
-          <h1 className="font-serif text-5xl md:text-6xl font-light">Our Collections</h1>
+          <h1 className="font-serif text-3xl sm:text-5xl md:text-6xl font-light">Our Collections</h1>
           <p className="mt-6 text-text-secondary text-sm max-w-md mx-auto leading-relaxed">
             Each collection is a distinct expression of South Asian artistry and modern design.
           </p>

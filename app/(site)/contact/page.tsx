@@ -22,7 +22,7 @@ export default function ContactPage() {
           <p className="text-[11px] font-medium uppercase tracking-[0.3em] text-secondary mb-6">
             Reach Out
           </p>
-          <h1 className="font-serif text-5xl md:text-6xl font-light">Contact Us</h1>
+          <h1 className="font-serif text-3xl sm:text-5xl md:text-6xl font-light">Contact Us</h1>
         </div>
       </section>
 
