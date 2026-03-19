@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { getCollectionByHandle, getProducts } from '@/lib/shopify';
+import { getCollectionByHandle, getAllProducts } from '@/lib/shopify';
 import { mockCollections, mockProducts } from '@/lib/mock-data';
 import ProductCard from '@/app/components/ProductCard';
 
@@ -8,7 +8,7 @@ async function getCollectionData(handle: string) {
   // "all" is a virtual collection showing every product
   if (handle === 'all') {
     const products = process.env.SHOPIFY_STORE_DOMAIN && process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN
-      ? await getProducts(50)
+      ? await getAllProducts()
       : mockProducts;
     return {
       collection: { title: 'Shop All', description: 'Browse our entire collection.' },

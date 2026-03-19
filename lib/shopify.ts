@@ -99,8 +99,12 @@ const productByHandleQuery = `
 `;
 
 const productsQuery = `
-  query Products($first: Int!) {
-    products(first: $first) {
+  query Products($first: Int!, $after: String) {
+    products(first: $first, after: $after) {
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
       edges {
         node {
           id
@@ -186,12 +190,38 @@ const COVER_TAG = 'collection-cover';
 
 export async function getProducts(first = 20) {
   const data = await shopifyFetch<{
-    products: { edges: Array<{ node: ShopifyProduct }> };
+    products: { pageInfo: { hasNextPage: boolean; endCursor: string | null }; edges: Array<{ node: ShopifyProduct }> };
   }>(productsQuery, { first: first + 10 });
   return data.products.edges
     .map((e) => e.node)
     .filter((p) => !p.tags?.includes(COVER_TAG))
     .slice(0, first);
+}
+
+interface ProductsQueryResult {
+  products: {
+    pageInfo: { hasNextPage: boolean; endCursor: string | null };
+    edges: Array<{ node: ShopifyProduct }>;
+  };
+}
+
+/** Fetch ALL products with cursor-based pagination */
+export async function getAllProducts() {
+  const allProducts: ShopifyProduct[] = [];
+  let cursor: string | null = null;
+  let hasNext = true;
+
+  while (hasNext) {
+    const result: ProductsQueryResult = await shopifyFetch<ProductsQueryResult>(
+      productsQuery, { first: 250, after: cursor }
+    );
+
+    allProducts.push(...result.products.edges.map((e) => e.node));
+    hasNext = result.products.pageInfo.hasNextPage;
+    cursor = result.products.pageInfo.endCursor;
+  }
+
+  return allProducts.filter((p) => !p.tags?.includes(COVER_TAG));
 }
 
 export async function getCollections(first = 10) {
