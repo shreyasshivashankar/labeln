@@ -129,37 +129,48 @@ export default function AdminPage() {
     setShowCommonPicker(false);
   };
 
+  // Error for new order form
+  const [newOrderError, setNewOrderError] = useState('');
+
   const startNewOrder = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!newOrderNumber.trim()) return;
     setSaving(true);
+    setNewOrderError('');
 
-    const res = await fetch('/api/admin/measurements', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        shopify_order_id: `order-${newOrderNumber.replace(/^#/, '')}`,
-        order_number: newOrderNumber.startsWith('#') ? newOrderNumber : `#${newOrderNumber}`,
-        customer_email: newCustomerEmail.toLowerCase(),
-        customer_name: newCustomerName,
-        status: 'pending_measurement',
-        values: {},
-        custom_fields: [],
-        notes: null,
-      }),
-    });
+    try {
+      const res = await fetch('/api/admin/measurements', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          shopify_order_id: `order-${newOrderNumber.replace(/^#/, '')}`,
+          order_number: newOrderNumber.startsWith('#') ? newOrderNumber : `#${newOrderNumber}`,
+          customer_email: newCustomerEmail.toLowerCase(),
+          customer_name: newCustomerName,
+          status: 'pending_measurement',
+          values: {},
+          custom_fields: [],
+          notes: null,
+        }),
+      });
 
-    const data = await res.json();
-    setSaving(false);
+      const data = await res.json();
+      setSaving(false);
 
-    if (res.ok) {
-      setShowNewForm(false);
-      setNewOrderNumber('');
-      setNewCustomerName('');
-      setNewCustomerEmail('');
-      openRecord(data.measurement);
-      setEditing(true);
-      fetchRecords();
+      if (res.ok && data.measurement) {
+        setShowNewForm(false);
+        setNewOrderNumber('');
+        setNewCustomerName('');
+        setNewCustomerEmail('');
+        openRecord(data.measurement);
+        setEditing(true);
+        fetchRecords();
+      } else {
+        setNewOrderError(data.error || `Server error (${res.status}). Check that SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY are set in Vercel.`);
+      }
+    } catch (err) {
+      setSaving(false);
+      setNewOrderError('Network error — could not reach the server.');
     }
   };
 
@@ -640,6 +651,9 @@ export default function AdminPage() {
               </button>
             </div>
           </form>
+          {newOrderError && (
+            <p className="text-red-600 text-xs mt-4">{newOrderError}</p>
+          )}
         </div>
       )}
 
