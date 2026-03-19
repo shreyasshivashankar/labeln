@@ -191,11 +191,8 @@ const COVER_TAG = 'collection-cover';
 export async function getProducts(first = 20) {
   const data = await shopifyFetch<{
     products: { pageInfo: { hasNextPage: boolean; endCursor: string | null }; edges: Array<{ node: ShopifyProduct }> };
-  }>(productsQuery, { first: first + 10 });
-  return data.products.edges
-    .map((e) => e.node)
-    .filter((p) => !p.tags?.includes(COVER_TAG))
-    .slice(0, first);
+  }>(productsQuery, { first });
+  return data.products.edges.map((e) => e.node);
 }
 
 interface ProductsQueryResult {
@@ -221,7 +218,7 @@ export async function getAllProducts() {
     cursor = result.products.pageInfo.endCursor;
   }
 
-  return allProducts.filter((p) => !p.tags?.includes(COVER_TAG));
+  return allProducts;
 }
 
 export async function getCollections(first = 10) {
@@ -271,9 +268,7 @@ export async function getCollectionByHandle(handle: string, productsFirst = 20) 
 
   return {
     collection: data.collection,
-    products: data.collection.products.edges
-      .map((e) => e.node)
-      .filter((p) => !p.tags?.includes(COVER_TAG)),
+    products: data.collection.products.edges.map((e) => e.node),
   };
 }
 
@@ -304,10 +299,7 @@ export async function searchProducts(query: string, first = 20) {
   const data = await shopifyFetch<{
     products: { edges: Array<{ node: ShopifyProduct }> };
   }>(searchProductsQuery, { query, first: first + 10 });
-  return data.products.edges
-    .map((e) => e.node)
-    .filter((p) => !p.tags?.includes(COVER_TAG))
-    .slice(0, first);
+  return data.products.edges.map((e) => e.node).slice(0, first);
 }
 
 // ─── Cart ─────────────────────────────────────────────────────────────────────
