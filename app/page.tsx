@@ -4,6 +4,7 @@ import { getCollections, getProducts } from '@/lib/shopify';
 import { mockCollections, mockProducts } from '../lib/mock-data';
 import CollectionCard from './components/CollectionCard';
 import ProductCard from './components/ProductCard';
+import VideoShowcase from './components/VideoShowcase';
 
 async function getFeaturedCollections() {
   if (process.env.SHOPIFY_STORE_DOMAIN && process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN) {
@@ -39,15 +40,12 @@ export default async function Home() {
         />
         <div className="absolute inset-0 bg-black/30" />
         <div className="relative z-10 flex flex-col items-center justify-end h-full pb-24 px-6 text-white text-center">
-          <h1 className="font-logo text-5xl md:text-7xl lg:text-8xl font-normal tracking-[0.12em]">
-            LABEL N
-          </h1>
-          <p className="mt-5 text-sm md:text-base font-light tracking-[0.15em] uppercase max-w-lg">
+          <p className="text-sm md:text-base font-light tracking-[0.15em] uppercase max-w-lg">
             The art of South Asian couture — made for you
           </p>
           <Link
             href="/collections"
-            className="mt-10 px-10 py-3.5 border border-white text-[11px] font-medium uppercase tracking-[0.25em] hover:bg-white hover:text-black transition-all duration-300"
+            className="mt-5 px-10 py-3.5 border border-white text-[11px] font-medium uppercase tracking-[0.25em] hover:bg-white hover:text-black transition-all duration-300"
           >
             Explore Collection
           </Link>
@@ -85,18 +83,7 @@ export default async function Home() {
       </section>
 
       {/* Video Showcase */}
-      <section className="relative w-full overflow-hidden bg-black">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="w-full h-auto block"
-        >
-          <source src="/videos/showcase.mp4" type="video/mp4" />
-          <source src="/videos/showcase.mov" type="video/quicktime" />
-        </video>
-      </section>
+      <VideoShowcase />
 
       {/* Best Sellers */}
       <section className="py-24 md:py-32 bg-surface">
