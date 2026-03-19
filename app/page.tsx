@@ -39,7 +39,7 @@ export default async function Home() {
         />
         <div className="absolute inset-0 bg-black/30" />
         <div className="relative z-10 flex flex-col items-center justify-end h-full pb-24 px-6 text-white text-center">
-          <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl font-light tracking-[0.08em]">
+          <h1 className="font-logo text-5xl md:text-7xl lg:text-8xl font-normal tracking-[0.12em]">
             LABEL N
           </h1>
           <p className="mt-5 text-sm md:text-base font-light tracking-[0.15em] uppercase max-w-lg">

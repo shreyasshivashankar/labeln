@@ -53,7 +53,7 @@ export default function Header() {
 
           {/* Center logo */}
           <Link href="/" className="absolute left-1/2 -translate-x-1/2 lg:static lg:translate-x-0 lg:absolute lg:left-1/2 lg:-translate-x-1/2">
-            <span className="font-serif text-2xl lg:text-3xl tracking-[0.15em] font-light">
+            <span className="font-logo text-2xl lg:text-3xl tracking-[0.15em] font-normal">
               LABEL N
             </span>
           </Link>
