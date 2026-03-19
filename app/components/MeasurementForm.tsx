@@ -11,7 +11,7 @@ export default function MeasurementForm() {
   const { session } = useAuth();
   const [record, setRecord] = useState<MeasurementRecord | null>(null);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState(MEASUREMENT_TABS[0].id);
+  const [activeTab, setActiveTab] = useState(MEASUREMENT_TABS[0]?.id ?? 'upper_body');
 
   useEffect(() => {
     if (!session) {
