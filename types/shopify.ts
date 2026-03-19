@@ -3,6 +3,12 @@
  * Use Supabase CLI to generate types from database: supabase gen types typescript
  */
 
+export interface ShopifyProductOption {
+  id: string;
+  name: string;
+  values: string[];
+}
+
 export interface ShopifyProduct {
   id: string;
   handle: string;
@@ -12,6 +18,7 @@ export interface ShopifyProduct {
   productType: string;
   vendor: string;
   tags: string[];
+  options?: ShopifyProductOption[];
   priceRange: {
     minVariantPrice: { amount: string; currencyCode: string };
     maxVariantPrice: { amount: string; currencyCode: string };
@@ -28,6 +35,7 @@ export interface ShopifyProduct {
         title: string;
         availableForSale: boolean;
         price: { amount: string; currencyCode: string };
+        selectedOptions?: Array<{ name: string; value: string }>;
       };
     }>;
   };

@@ -68,6 +68,11 @@ const productByHandleQuery = `
       productType
       vendor
       tags
+      options {
+        id
+        name
+        values
+      }
       priceRange {
         minVariantPrice { amount currencyCode }
         maxVariantPrice { amount currencyCode }
@@ -82,6 +87,10 @@ const productByHandleQuery = `
             title
             availableForSale
             price { amount currencyCode }
+            selectedOptions {
+              name
+              value
+            }
           }
         }
       }
