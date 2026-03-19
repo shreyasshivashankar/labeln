@@ -29,20 +29,23 @@ export default function SignUp() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-16">
-      <div className="max-w-md mx-auto">
-        <h1 className="text-4xl font-bold text-center mb-2">Create Account</h1>
-        <p className="text-center text-gray-500 mb-8">
-          Create an account to save your custom measurements.
-        </p>
-        <form onSubmit={handleSubmit} className="space-y-4">
+    <main className="min-h-[70vh] flex items-center justify-center px-6">
+      <div className="w-full max-w-sm">
+        <div className="text-center mb-10">
+          <h1 className="font-serif text-4xl font-light">Create Account</h1>
+          <p className="mt-3 text-text-secondary text-sm">
+            Save your custom measurements and order history.
+          </p>
+        </div>
+
+        <form onSubmit={handleSubmit} className="space-y-6">
           {error && (
-            <div className="bg-red-50 border border-red-200 text-red-700 p-3 rounded-lg text-sm">
+            <div className="text-red-600 text-xs text-center py-3 border border-red-200 bg-red-50/50">
               {error}
             </div>
           )}
           <div>
-            <label htmlFor="name" className="block text-sm font-medium mb-1">
+            <label htmlFor="name" className="block text-[11px] font-medium uppercase tracking-[0.15em] mb-3">
               Full Name
             </label>
             <input
@@ -50,12 +53,12 @@ export default function SignUp() {
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full border-b border-border bg-transparent py-3 text-sm focus:outline-none focus:border-primary transition-colors"
               required
             />
           </div>
           <div>
-            <label htmlFor="email" className="block text-sm font-medium mb-1">
+            <label htmlFor="email" className="block text-[11px] font-medium uppercase tracking-[0.15em] mb-3">
               Email
             </label>
             <input
@@ -63,12 +66,12 @@ export default function SignUp() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full border-b border-border bg-transparent py-3 text-sm focus:outline-none focus:border-primary transition-colors"
               required
             />
           </div>
           <div>
-            <label htmlFor="password" className="block text-sm font-medium mb-1">
+            <label htmlFor="password" className="block text-[11px] font-medium uppercase tracking-[0.15em] mb-3">
               Password
             </label>
             <input
@@ -76,27 +79,28 @@ export default function SignUp() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full border-b border-border bg-transparent py-3 text-sm focus:outline-none focus:border-primary transition-colors"
               required
               minLength={6}
             />
-            <p className="text-xs text-gray-400 mt-1">At least 6 characters</p>
+            <p className="text-[10px] text-text-secondary mt-2 tracking-wide">Minimum 6 characters</p>
           </div>
           <button
             type="submit"
             disabled={submitting}
-            className="w-full bg-primary text-white py-3 rounded-full font-semibold hover:opacity-90 transition disabled:opacity-60"
+            className="w-full py-4 bg-primary text-white text-[11px] font-medium uppercase tracking-[0.25em] hover:bg-secondary transition-colors duration-300 disabled:opacity-50"
           >
             {submitting ? 'Creating account\u2026' : 'Create Account'}
           </button>
         </form>
-        <p className="text-center text-sm text-gray-500 mt-6">
+
+        <p className="text-center text-xs text-text-secondary mt-8">
           Already have an account?{' '}
-          <Link href="/auth/signin" className="text-primary underline underline-offset-2">
+          <Link href="/auth/signin" className="border-b border-primary pb-0.5 text-primary hover:opacity-50 transition-opacity">
             Sign in
           </Link>
         </p>
       </div>
-    </div>
+    </main>
   );
 }

@@ -4,58 +4,76 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-primary text-white mt-16">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
-          <div>
-            <h3 className="text-xl font-bold font-serif mb-3">Label N</h3>
-            <p className="text-white/70 text-sm leading-relaxed">
+    <footer className="border-t border-border">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-16 md:py-20">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8">
+          {/* Brand */}
+          <div className="md:col-span-1">
+            <Link href="/" className="font-serif text-xl tracking-[0.15em] font-light">
+              LABEL N
+            </Link>
+            <p className="mt-4 text-text-secondary text-xs leading-relaxed max-w-xs">
               Bespoke South Asian couture crafted with intention, precision, and heritage.
             </p>
           </div>
+
+          {/* Shop */}
           <div>
-            <h4 className="font-semibold text-secondary mb-4 text-sm uppercase tracking-wider">
-              Navigate
-            </h4>
-            <ul className="space-y-2 text-sm text-white/70">
+            <h4 className="text-[11px] font-medium uppercase tracking-[0.2em] mb-5">Shop</h4>
+            <ul className="space-y-3">
               <li>
-                <Link href="/collections" className="hover:text-white transition-colors">
-                  Collections
+                <Link href="/collections" className="text-text-secondary text-xs hover:text-primary transition-colors">
+                  All Collections
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="hover:text-white transition-colors">
+                <Link href="/collections" className="text-text-secondary text-xs hover:text-primary transition-colors">
+                  New Arrivals
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Company */}
+          <div>
+            <h4 className="text-[11px] font-medium uppercase tracking-[0.2em] mb-5">Company</h4>
+            <ul className="space-y-3">
+              <li>
+                <Link href="/about" className="text-text-secondary text-xs hover:text-primary transition-colors">
                   About
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="hover:text-white transition-colors">
+                <Link href="/contact" className="text-text-secondary text-xs hover:text-primary transition-colors">
                   Contact
                 </Link>
               </li>
               <li>
-                <Link href="/profile" className="hover:text-white transition-colors">
+                <Link href="/profile" className="text-text-secondary text-xs hover:text-primary transition-colors">
                   My Account
                 </Link>
               </li>
             </ul>
           </div>
+
+          {/* Contact */}
           <div>
-            <h4 className="font-semibold text-secondary mb-4 text-sm uppercase tracking-wider">
-              Get in Touch
-            </h4>
-            <p className="text-sm text-white/70 mb-1">info@labeln.com</p>
-            <p className="text-sm text-white/70 mb-4">Response within 24 hours</p>
+            <h4 className="text-[11px] font-medium uppercase tracking-[0.2em] mb-5">Get in Touch</h4>
+            <p className="text-text-secondary text-xs mb-1">info@labeln.com</p>
+            <p className="text-text-secondary text-xs mb-5">Response within 24 hours</p>
             <Link
               href="/contact"
-              className="inline-block text-sm border border-white/50 rounded-full px-5 py-2 hover:bg-white hover:text-primary transition-colors"
+              className="text-[11px] font-medium uppercase tracking-[0.2em] border-b border-primary pb-0.5 hover:opacity-50 transition-opacity"
             >
               Contact Us
             </Link>
           </div>
         </div>
-        <div className="border-t border-white/20 pt-6 text-center text-xs text-white/50">
-          <p>&copy; {year} Label N. All rights reserved.</p>
+
+        <div className="border-t border-border mt-16 pt-8 text-center">
+          <p className="text-text-secondary text-[10px] uppercase tracking-[0.2em]">
+            &copy; {year} Label N. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>

@@ -9,14 +9,17 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        'primary': '#1a237e', // Deep Navy
-        'secondary': '#c5a662', // Gold
-        'background': '#f5f5f5', // Cream
-        'text-primary': '#212121',
-        'text-secondary': '#757575',
+        'primary': '#000000',
+        'secondary': '#8a7d6b',
+        'accent': '#c5a47e',
+        'background': '#ffffff',
+        'surface': '#f7f5f2',
+        'text-primary': '#1a1a1a',
+        'text-secondary': '#6b6b6b',
+        'border': '#e5e0db',
       },
       fontFamily: {
-        'serif': ['"Playfair Display"', 'serif'],
+        'serif': ['"Cormorant Garamond"', 'serif'],
         'sans': ['Inter', 'sans-serif'],
       },
     },

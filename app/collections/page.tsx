@@ -13,20 +13,34 @@ export default async function CollectionsPage() {
   const collections = await getAllCollections();
 
   return (
-    <main className="container mx-auto px-4 py-16">
-      <h1 className="text-5xl font-bold text-center mb-4">Our Collections</h1>
-      <p className="text-center text-gray-600 mb-12 max-w-xl mx-auto">
-        Explore our curated collections — each one a distinct expression of South Asian artistry.
-      </p>
-      {collections.length === 0 ? (
-        <p className="text-center text-gray-500">No collections available yet. Check back soon.</p>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {collections.map((collection) => (
-            <CollectionCard key={collection.id} collection={collection} />
-          ))}
+    <main>
+      <section className="bg-surface py-24 md:py-32">
+        <div className="max-w-3xl mx-auto px-6 text-center">
+          <p className="text-[11px] font-medium uppercase tracking-[0.3em] text-secondary mb-6">
+            Explore
+          </p>
+          <h1 className="font-serif text-5xl md:text-6xl font-light">Our Collections</h1>
+          <p className="mt-6 text-text-secondary text-sm max-w-md mx-auto leading-relaxed">
+            Each collection is a distinct expression of South Asian artistry and modern design.
+          </p>
         </div>
-      )}
+      </section>
+
+      <section className="py-24 md:py-32">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          {collections.length === 0 ? (
+            <p className="text-center text-text-secondary text-sm">
+              No collections available yet. Check back soon.
+            </p>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {collections.map((collection) => (
+                <CollectionCard key={collection.id} collection={collection} />
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
     </main>
   );
 }

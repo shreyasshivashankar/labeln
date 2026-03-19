@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { getCollections, getProducts } from '@/lib/shopify';
 import { mockCollections, mockProducts } from '../lib/mock-data';
 import CollectionCard from './components/CollectionCard';
@@ -26,36 +27,56 @@ export default async function Home() {
 
   return (
     <main>
-      {/* Hero */}
-      <section className="relative h-[calc(100vh-64px)] min-h-[480px]">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage:
-              "url('https://images.pexels.com/photos/9827020/pexels-photo-9827020.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')",
-          }}
+      {/* Hero — full bleed editorial */}
+      <section className="relative h-screen min-h-[600px]">
+        <Image
+          src="https://images.pexels.com/photos/9827020/pexels-photo-9827020.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=2"
+          alt="South Asian couture"
+          fill
+          className="object-cover"
+          priority
+          sizes="100vw"
         />
-        <div className="relative z-10 flex flex-col items-center justify-center h-full text-white bg-black/50 px-4">
-          <h1 className="text-5xl md:text-7xl font-bold font-serif text-center tracking-wide">
-            Label N
+        <div className="absolute inset-0 bg-black/30" />
+        <div className="relative z-10 flex flex-col items-center justify-end h-full pb-24 px-6 text-white text-center">
+          <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl font-light tracking-[0.08em]">
+            LABEL N
           </h1>
-          <p className="mt-4 text-lg md:text-xl text-center text-white/90 max-w-xl">
-            Discover the art of South Asian couture — made for you, made to last.
+          <p className="mt-5 text-sm md:text-base font-light tracking-[0.15em] uppercase max-w-lg">
+            The art of South Asian couture — made for you
           </p>
           <Link
             href="/collections"
-            className="mt-10 px-10 py-3 bg-white text-black font-semibold rounded-full hover:bg-secondary hover:text-white transition-colors"
+            className="mt-10 px-10 py-3.5 border border-white text-[11px] font-medium uppercase tracking-[0.25em] hover:bg-white hover:text-black transition-all duration-300"
           >
-            Shop Now
+            Explore Collection
           </Link>
         </div>
       </section>
 
+      {/* Brand statement */}
+      <section className="py-24 md:py-32">
+        <div className="max-w-3xl mx-auto px-6 text-center">
+          <p className="font-serif text-2xl md:text-3xl lg:text-4xl font-light leading-relaxed text-text-primary">
+            Where heritage meets the modern wardrobe. Every garment crafted with intention,
+            precision, and love.
+          </p>
+        </div>
+      </section>
+
       {/* Featured Collections */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-12">Featured Collections</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <section className="pb-24 md:pb-32">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <div className="flex justify-between items-end mb-12">
+            <h2 className="font-serif text-3xl md:text-4xl font-light">Collections</h2>
+            <Link
+              href="/collections"
+              className="text-[11px] font-medium uppercase tracking-[0.2em] hover:opacity-50 transition-opacity border-b border-primary pb-0.5"
+            >
+              View All
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {collections.map((collection) => (
               <CollectionCard key={collection.id} collection={collection} />
             ))}
@@ -64,65 +85,75 @@ export default async function Home() {
       </section>
 
       {/* Best Sellers */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-12">Best Sellers</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+      <section className="py-24 md:py-32 bg-surface">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <div className="flex justify-between items-end mb-12">
+            <h2 className="font-serif text-3xl md:text-4xl font-light">Best Sellers</h2>
+            <Link
+              href="/collections"
+              className="text-[11px] font-medium uppercase tracking-[0.2em] hover:opacity-50 transition-opacity border-b border-primary pb-0.5"
+            >
+              Shop All
+            </Link>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
             {products.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
-          </div>
-          <div className="text-center mt-10">
-            <Link
-              href="/collections"
-              className="inline-block px-8 py-3 border border-black rounded-full hover:bg-black hover:text-white transition-colors"
-            >
-              View All
-            </Link>
           </div>
         </div>
       </section>
 
       {/* Custom Fit CTA */}
-      <section className="py-20 bg-primary text-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold mb-4">Made for You, Precisely</h2>
-          <p className="max-w-2xl mx-auto text-white/80 mb-10 leading-relaxed">
+      <section className="py-24 md:py-32">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <p className="text-[11px] font-medium uppercase tracking-[0.3em] text-secondary mb-6">
+            Bespoke Experience
+          </p>
+          <h2 className="font-serif text-4xl md:text-5xl font-light mb-6">Made for You, Precisely</h2>
+          <p className="text-text-secondary text-sm md:text-base leading-relaxed max-w-2xl mx-auto mb-12">
             Every Label N garment is crafted to your exact measurements. Book a virtual consultation
             and our designers will guide you through a personal fitting over a video call.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/profile"
-              className="px-8 py-3 bg-secondary text-white font-semibold rounded-full hover:opacity-90 transition"
+              className="px-10 py-3.5 bg-primary text-white text-[11px] font-medium uppercase tracking-[0.25em] hover:bg-secondary transition-colors duration-300"
             >
               My Measurements
             </Link>
             <Link
               href="/contact"
-              className="px-8 py-3 border border-white rounded-full hover:bg-white hover:text-primary transition"
+              className="px-10 py-3.5 border border-primary text-[11px] font-medium uppercase tracking-[0.25em] hover:bg-primary hover:text-white transition-all duration-300"
             >
-              Schedule a Consultation
+              Book Consultation
             </Link>
           </div>
         </div>
       </section>
 
-      {/* About teaser */}
-      <section className="py-20">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold mb-4">About Label N</h2>
-          <p className="max-w-2xl mx-auto text-gray-600 leading-relaxed">
-            Label N is where South Asian heritage meets contemporary design. We believe every
-            garment should be a perfect expression of who you are — crafted with intention,
-            precision, and love.
-          </p>
-          <Link
-            href="/about"
-            className="mt-8 inline-block px-8 py-3 border border-black rounded-full hover:bg-black hover:text-white transition-colors"
-          >
-            Our Story
-          </Link>
+      {/* About teaser — editorial split */}
+      <section className="bg-surface">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-24 md:py-32">
+          <div className="max-w-2xl">
+            <p className="text-[11px] font-medium uppercase tracking-[0.3em] text-secondary mb-6">
+              Our Story
+            </p>
+            <h2 className="font-serif text-4xl md:text-5xl font-light mb-6">
+              South Asian Heritage,<br />Contemporary Design
+            </h2>
+            <p className="text-text-secondary text-sm leading-relaxed mb-10 max-w-lg">
+              Label N is where tradition meets the contemporary. We believe every garment should be
+              a perfect expression of who you are — handcrafted using time-honored techniques
+              and finished with modern sensibility.
+            </p>
+            <Link
+              href="/about"
+              className="text-[11px] font-medium uppercase tracking-[0.2em] border-b border-primary pb-0.5 hover:opacity-50 transition-opacity"
+            >
+              Read More
+            </Link>
+          </div>
         </div>
       </section>
     </main>

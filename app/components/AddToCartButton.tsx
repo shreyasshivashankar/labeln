@@ -17,7 +17,7 @@ export default function AddToCartButton({ variantId, availableForSale }: Props) 
     return (
       <button
         disabled
-        className="mt-8 w-full sm:w-auto px-10 py-3 bg-gray-200 text-gray-500 font-semibold rounded-full cursor-not-allowed"
+        className="w-full py-4 bg-surface text-text-secondary text-[11px] font-medium uppercase tracking-[0.25em] cursor-not-allowed"
       >
         Sold Out
       </button>
@@ -40,11 +40,11 @@ export default function AddToCartButton({ variantId, availableForSale }: Props) 
       <button
         onClick={handleClick}
         disabled={loading || adding}
-        className="mt-8 w-full sm:w-auto px-10 py-3 bg-black text-white font-semibold rounded-full hover:bg-gray-800 transition disabled:opacity-60"
+        className="w-full py-4 bg-primary text-white text-[11px] font-medium uppercase tracking-[0.25em] hover:bg-secondary transition-colors duration-300 disabled:opacity-50"
       >
-        {adding ? 'Adding\u2026' : 'Add to Cart'}
+        {adding ? 'Adding\u2026' : 'Add to Bag'}
       </button>
-      {error && <p className="mt-2 text-sm text-red-500">{error}</p>}
+      {error && <p className="mt-3 text-xs text-red-600">{error}</p>}
     </div>
   );
 }

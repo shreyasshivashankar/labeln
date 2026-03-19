@@ -10,21 +10,22 @@ interface CollectionCardCollection {
 
 export default function CollectionCard({ collection }: { collection: CollectionCardCollection }) {
   return (
-    <Link href={`/collections/${collection.handle}`} className="group">
-      <div className="relative w-full h-80 rounded-lg overflow-hidden">
+    <Link href={`/collections/${collection.handle}`} className="group block">
+      <div className="relative w-full aspect-[3/4] overflow-hidden bg-surface">
         {collection.image ? (
           <Image
             src={collection.image.url}
             alt={collection.image.altText ?? collection.title}
             fill
-            className="object-cover group-hover:scale-105 transition-transform duration-300"
+            className="object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out"
             sizes="(max-width: 768px) 100vw, 33vw"
           />
         ) : (
-          <div className="w-full h-full bg-gray-200" />
+          <div className="w-full h-full bg-surface" />
         )}
-        <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-          <h3 className="text-white text-3xl font-bold font-serif drop-shadow-lg">
+        <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors duration-500" />
+        <div className="absolute inset-0 flex items-end p-6 md:p-8">
+          <h3 className="text-white font-serif text-2xl md:text-3xl font-light tracking-wide">
             {collection.title}
           </h3>
         </div>

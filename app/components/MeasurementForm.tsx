@@ -29,19 +29,19 @@ export default function MeasurementForm() {
 
   if (loading) {
     return (
-      <div className="bg-gray-50 p-8 rounded-lg space-y-3 animate-pulse">
-        <div className="h-6 bg-gray-200 rounded w-48" />
-        <div className="h-4 bg-gray-200 rounded w-full" />
-        <div className="h-4 bg-gray-200 rounded w-3/4" />
+      <div className="space-y-4 animate-pulse">
+        <div className="h-6 bg-surface rounded w-48" />
+        <div className="h-4 bg-surface rounded w-full" />
+        <div className="h-4 bg-surface rounded w-3/4" />
       </div>
     );
   }
 
   if (!record) {
     return (
-      <div className="bg-gray-50 p-8 rounded-lg text-center">
-        <h2 className="text-2xl font-bold mb-3">Custom Measurements</h2>
-        <p className="text-gray-600 mb-6 max-w-md mx-auto">
+      <div className="text-center py-12">
+        <h2 className="font-serif text-3xl font-light mb-4">Custom Measurements</h2>
+        <p className="text-text-secondary text-sm mb-8 max-w-md mx-auto leading-relaxed">
           You don&apos;t have saved measurements yet. Schedule a consultation and our team will
           guide you through the fitting on a video call.
         </p>
@@ -49,7 +49,7 @@ export default function MeasurementForm() {
           href={CALENDLY_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block bg-primary text-white px-8 py-3 rounded-full hover:opacity-90 transition"
+          className="inline-block px-10 py-3.5 bg-primary text-white text-[11px] font-medium uppercase tracking-[0.25em] hover:bg-secondary transition-colors duration-300"
         >
           Schedule a Consultation
         </a>
@@ -67,29 +67,29 @@ export default function MeasurementForm() {
   if (!currentTab) return null;
 
   return (
-    <div className="bg-gray-50 p-8 rounded-lg">
-      <div className="flex justify-between items-start mb-6">
-        <h2 className="text-2xl font-bold">Your Measurements</h2>
+    <div>
+      <div className="flex justify-between items-start mb-10">
+        <h2 className="font-serif text-3xl font-light">Your Measurements</h2>
         <a
           href={CALENDLY_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-sm text-primary underline underline-offset-2"
+          className="text-[11px] font-medium uppercase tracking-[0.2em] text-text-secondary hover:text-primary transition-colors border-b border-border pb-0.5"
         >
-          Update via consultation
+          Update
         </a>
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-1 border-b border-gray-200 mb-6 overflow-x-auto">
+      <div className="flex gap-6 border-b border-border mb-8 overflow-x-auto">
         {allTabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`px-4 py-2 text-sm font-medium whitespace-nowrap border-b-2 transition-colors ${
+            className={`pb-3 text-[11px] font-medium uppercase tracking-[0.2em] whitespace-nowrap border-b-2 transition-colors ${
               activeTab === tab.id
                 ? 'border-primary text-primary'
-                : 'border-transparent text-gray-500 hover:text-gray-700'
+                : 'border-transparent text-text-secondary hover:text-primary'
             }`}
           >
             {tab.label}
@@ -99,32 +99,32 @@ export default function MeasurementForm() {
 
       {/* Tab content */}
       {currentTab.id === 'custom' ? (
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-px bg-border">
           {record.custom_fields.map((field) => (
-            <div key={field.key} className="bg-white p-4 rounded-lg border border-gray-100">
-              <p className="text-xs text-gray-500 mb-1">{field.label}</p>
-              <p className="font-semibold">
+            <div key={field.key} className="bg-white p-5">
+              <p className="text-[10px] uppercase tracking-[0.15em] text-text-secondary mb-2">{field.label}</p>
+              <p className="font-serif text-lg">
                 {field.value !== null && field.value !== undefined ? (
-                  `${field.value} ${MEASUREMENT_UNIT}`
+                  <>{field.value} <span className="text-text-secondary text-sm">{MEASUREMENT_UNIT}</span></>
                 ) : (
-                  <span className="text-gray-300 font-normal">&mdash;</span>
+                  <span className="text-border">&mdash;</span>
                 )}
               </p>
             </div>
           ))}
         </div>
       ) : (
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-px bg-border">
           {currentTab.fields.map(({ key, label }) => {
             const value = record.values[key];
             return (
-              <div key={key} className="bg-white p-4 rounded-lg border border-gray-100">
-                <p className="text-xs text-gray-500 mb-1">{label}</p>
-                <p className="font-semibold">
+              <div key={key} className="bg-white p-5">
+                <p className="text-[10px] uppercase tracking-[0.15em] text-text-secondary mb-2">{label}</p>
+                <p className="font-serif text-lg">
                   {value !== undefined && value !== null ? (
-                    `${value} ${MEASUREMENT_UNIT}`
+                    <>{value} <span className="text-text-secondary text-sm">{MEASUREMENT_UNIT}</span></>
                   ) : (
-                    <span className="text-gray-300 font-normal">&mdash;</span>
+                    <span className="text-border">&mdash;</span>
                   )}
                 </p>
               </div>
@@ -134,18 +134,18 @@ export default function MeasurementForm() {
       )}
 
       {record.notes && (
-        <div className="mt-6">
-          <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-3">
+        <div className="mt-10 pt-8 border-t border-border">
+          <p className="text-[10px] uppercase tracking-[0.15em] text-text-secondary mb-3">
             Notes from your stylist
-          </h3>
-          <p className="bg-white p-4 rounded-lg border border-gray-100 text-sm text-gray-700">
+          </p>
+          <p className="text-sm text-text-secondary leading-relaxed">
             {record.notes}
           </p>
         </div>
       )}
 
-      <p className="mt-8 text-xs text-gray-400 text-center">
-        All measurements in inches. Maintained by our team — contact us to update.
+      <p className="mt-10 text-[10px] text-text-secondary text-center uppercase tracking-[0.2em]">
+        All measurements in inches
       </p>
     </div>
   );

@@ -48,43 +48,62 @@ export default async function ProductPage({
   if (!product) notFound();
 
   const price = product.priceRange.minVariantPrice;
+  const formattedPrice = price.currencyCode === 'USD' ? `$${price.amount}` : `${price.amount} ${price.currencyCode}`;
   const image = product.images.edges[0]?.node;
 
   return (
-    <main className="container mx-auto py-16">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-        <div className="relative aspect-square">
-          {image && (
-            <Image
-              src={image.url}
-              alt={image.altText ?? product.title}
-              fill
-              className="object-cover rounded-lg"
-              sizes="(max-width: 768px) 100vw, 50vw"
-              priority
-            />
-          )}
-        </div>
-        <div>
-          <Link href="/" className="text-sm text-gray-600 hover:underline mb-4 inline-block">
-            ← Back to products
-          </Link>
-          <h1 className="text-4xl font-bold">{product.title}</h1>
-          <p className="mt-4 text-2xl font-semibold">
-            {price.amount} {price.currencyCode}
-          </p>
-          {product.description && (
-            <div
-              className="mt-6 prose max-w-none"
-              dangerouslySetInnerHTML={{ __html: product.descriptionHtml || product.description }}
-            />
-          )}
-          {(() => {
-            const variant = product.variants.edges[0]?.node;
-            return variant ? (
-              <AddToCartButton variantId={variant.id} availableForSale={variant.availableForSale} />
-            ) : null;
-          })()}
+    <main>
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-12 md:py-20">
+        <Link
+          href="/collections"
+          className="text-[11px] font-medium uppercase tracking-[0.2em] text-text-secondary hover:text-primary transition-colors mb-10 inline-block"
+        >
+          &larr; Back to Shop
+        </Link>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
+          <div className="relative aspect-[3/4] bg-surface overflow-hidden">
+            {image && (
+              <Image
+                src={image.url}
+                alt={image.altText ?? product.title}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                priority
+              />
+            )}
+          </div>
+
+          <div className="flex flex-col justify-center py-6">
+            <h1 className="font-serif text-3xl md:text-4xl font-light">{product.title}</h1>
+            <p className="mt-4 text-lg text-text-secondary">{formattedPrice}</p>
+
+            {product.description && (
+              <div
+                className="mt-8 text-text-secondary text-sm leading-[1.9] prose prose-sm max-w-none"
+                dangerouslySetInnerHTML={{ __html: product.descriptionHtml || product.description }}
+              />
+            )}
+
+            {(() => {
+              const variant = product.variants.edges[0]?.node;
+              return variant ? (
+                <div className="mt-10">
+                  <AddToCartButton variantId={variant.id} availableForSale={variant.availableForSale} />
+                </div>
+              ) : null;
+            })()}
+
+            <div className="mt-12 pt-8 border-t border-border space-y-3">
+              <p className="text-[11px] uppercase tracking-[0.15em] text-text-secondary">
+                Free shipping on orders over $200
+              </p>
+              <p className="text-[11px] uppercase tracking-[0.15em] text-text-secondary">
+                Made to your measurements
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </main>
