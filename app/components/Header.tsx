@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useCart } from './CartProvider';
 
 const NAV_LINKS = [
@@ -15,6 +15,25 @@ export default function Header() {
   const [coutureOpen, setCoutureOpen] = useState(false);
   const coutureTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  // Search
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const searchInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (searchOpen && searchInputRef.current) {
+      searchInputRef.current.focus();
+    }
+  }, [searchOpen]);
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!searchQuery.trim()) return;
+    window.location.href = `/search?q=${encodeURIComponent(searchQuery.trim())}`;
+    setSearchOpen(false);
+    setSearchQuery('');
+  };
+
   const cartBadge = cart?.totalQuantity ?? 0;
 
   const handleCoutureEnter = () => {
@@ -25,6 +44,14 @@ export default function Header() {
   const handleCoutureLeave = () => {
     coutureTimeout.current = setTimeout(() => setCoutureOpen(false), 150);
   };
+
+  const SearchIcon = (
+    <button onClick={() => setSearchOpen(true)} className="p-2 hover:opacity-60 transition-opacity" aria-label="Search">
+      <svg xmlns="http://www.w3.org/2000/svg" className="h-[18px] w-[18px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+      </svg>
+    </button>
+  );
 
   const CartIcon = (
     <button onClick={openDrawer} className="relative p-2 hover:opacity-60 transition-opacity" aria-label="Open cart">
@@ -42,8 +69,7 @@ export default function Header() {
   return (
     <header className="bg-white text-primary sticky top-0 z-50 border-b border-border">
       <nav className="mx-auto max-w-7xl px-6 lg:px-12">
-        {/* Top bar */}
-        <div className="flex justify-between items-center h-16 lg:h-20">
+        <div className="grid grid-cols-3 items-center h-16 lg:h-20">
           {/* Left nav - desktop */}
           <div className="hidden lg:flex items-center gap-8">
             {NAV_LINKS.map(({ href, label }) => (
@@ -87,46 +113,70 @@ export default function Header() {
             </div>
           </div>
 
-          {/* Center logo */}
-          <Link href="/" className="absolute left-1/2 -translate-x-1/2 lg:static lg:translate-x-0 lg:absolute lg:left-1/2 lg:-translate-x-1/2">
-            <span className="font-logo text-2xl lg:text-3xl tracking-[0.15em] font-normal">
-              LABEL N
-            </span>
-          </Link>
-
-          {/* Right actions - desktop */}
-          <div className="hidden lg:flex items-center gap-6">
-            <Link
-              href="/contact"
-              className="text-[11px] font-medium uppercase tracking-[0.2em] text-accent hover:opacity-70 transition-opacity"
-            >
-              Made to Order
-            </Link>
-            {CartIcon}
-          </div>
-
-          {/* Mobile: cart + hamburger */}
-          <div className="flex lg:hidden items-center gap-2 ml-auto">
-            {CartIcon}
+          {/* Mobile: hamburger on left */}
+          <div className="lg:hidden">
             <button
               className="flex flex-col gap-[5px] p-2"
               onClick={() => setOpen((v) => !v)}
               aria-label={open ? 'Close menu' : 'Open menu'}
               aria-expanded={open}
             >
-              <span
-                className={`block w-5 h-[1px] bg-primary transition-transform duration-300 ${open ? 'rotate-45 translate-y-[6px]' : ''}`}
-              />
-              <span
-                className={`block w-5 h-[1px] bg-primary transition-opacity duration-300 ${open ? 'opacity-0' : ''}`}
-              />
-              <span
-                className={`block w-5 h-[1px] bg-primary transition-transform duration-300 ${open ? '-rotate-45 -translate-y-[6px]' : ''}`}
-              />
+              <span className={`block w-5 h-[1px] bg-primary transition-transform duration-300 ${open ? 'rotate-45 translate-y-[6px]' : ''}`} />
+              <span className={`block w-5 h-[1px] bg-primary transition-opacity duration-300 ${open ? 'opacity-0' : ''}`} />
+              <span className={`block w-5 h-[1px] bg-primary transition-transform duration-300 ${open ? '-rotate-45 -translate-y-[6px]' : ''}`} />
             </button>
+          </div>
+
+          {/* Center logo */}
+          <div className="flex justify-center">
+            <Link href="/">
+              <span className="font-logo text-2xl lg:text-3xl tracking-[0.15em] font-normal">
+                LABEL N
+              </span>
+            </Link>
+          </div>
+
+          {/* Right actions */}
+          <div className="flex items-center gap-4 justify-end">
+            <Link
+              href="/contact"
+              className="hidden lg:block text-[11px] font-medium uppercase tracking-[0.2em] text-accent hover:opacity-70 transition-opacity"
+            >
+              Made to Order
+            </Link>
+            {SearchIcon}
+            {CartIcon}
           </div>
         </div>
       </nav>
+
+      {/* Search overlay */}
+      {searchOpen && (
+        <div className="absolute inset-x-0 top-0 bg-white z-50 border-b border-border">
+          <div className="mx-auto max-w-7xl px-6 lg:px-12">
+            <form onSubmit={handleSearch} className="flex items-center h-16 lg:h-20 gap-4">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-[18px] w-[18px] text-text-secondary shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+              </svg>
+              <input
+                ref={searchInputRef}
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search products and collections..."
+                className="flex-1 bg-transparent text-sm focus:outline-none placeholder:text-text-secondary/50"
+              />
+              <button
+                type="button"
+                onClick={() => { setSearchOpen(false); setSearchQuery(''); }}
+                className="p-2 text-[11px] font-medium uppercase tracking-[0.2em] text-text-secondary hover:text-primary transition-colors"
+              >
+                Close
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
 
       {/* Mobile drawer */}
       {open && (

@@ -88,7 +88,7 @@ export default function Footer() {
             </a>
             <p className="text-text-secondary text-[10px] mt-1 mb-3">Response within 24 hours</p>
             <a href="tel:+19727999072" className="text-text-secondary text-xs hover:text-primary transition-colors block mb-5">
-              (972) 799-9072
+              +1 (972) 799-9072
             </a>
             <Link
               href="/contact"

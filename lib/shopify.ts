@@ -239,6 +239,39 @@ export async function getCollectionByHandle(handle: string, productsFirst = 20) 
   };
 }
 
+// ─── Search ──────────────────────────────────────────────────────────────────
+
+const searchProductsQuery = `
+  query SearchProducts($query: String!, $first: Int!) {
+    products(first: $first, query: $query) {
+      edges {
+        node {
+          id
+          handle
+          title
+          tags
+          priceRange {
+            minVariantPrice { amount currencyCode }
+          }
+          images(first: 1) {
+            edges { node { url altText } }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export async function searchProducts(query: string, first = 20) {
+  const data = await shopifyFetch<{
+    products: { edges: Array<{ node: ShopifyProduct }> };
+  }>(searchProductsQuery, { query, first: first + 10 });
+  return data.products.edges
+    .map((e) => e.node)
+    .filter((p) => !p.tags?.includes(COVER_TAG))
+    .slice(0, first);
+}
+
 // ─── Cart ─────────────────────────────────────────────────────────────────────
 
 const cartFragment = `

@@ -23,9 +23,9 @@ export default function AboutPage() {
       </section>
 
       {/* Story — poetic narrative */}
-      <section className="py-24 md:py-32">
+      <section className="py-14 md:py-20">
         <div className="max-w-2xl mx-auto px-6">
-          <div className="space-y-10 text-text-secondary text-sm leading-[2]">
+          <div className="space-y-6 text-text-secondary text-sm leading-[1.9]">
             <p>
               There is a quiet language in the way fabric falls — a whisper of hands that shaped it,
               of stories stitched into every seam. Label N was born from that reverence. A belief that
@@ -53,7 +53,7 @@ export default function AboutPage() {
       </section>
 
       {/* Values */}
-      <section className="bg-surface py-24 md:py-32">
+      <section className="bg-surface py-14 md:py-20">
         <div className="max-w-5xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 text-center">
             <div>
@@ -79,16 +79,16 @@ export default function AboutPage() {
       </section>
 
       {/* Founders Letter */}
-      <section className="py-24 md:py-32">
+      <section className="py-14 md:py-20">
         <div className="max-w-2xl mx-auto px-6">
-          <div className="text-center mb-16">
+          <div className="text-center mb-10">
             <p className="text-[11px] font-medium uppercase tracking-[0.3em] text-secondary mb-6">
               A Note from Us
             </p>
             <h2 className="font-serif text-3xl md:text-4xl font-light">From Our Hearts to Yours</h2>
           </div>
 
-          <div className="space-y-8 text-text-secondary text-sm leading-[2] italic">
+          <div className="space-y-6 text-text-secondary text-sm leading-[1.9] italic">
             <p>
               We started Label N with a simple dream — to create something that felt like home,
               no matter where you wore it. Something that honored the hands that made it and the
@@ -106,7 +106,7 @@ export default function AboutPage() {
           </div>
 
           {/* Founders Photo */}
-          <div className="mt-16 flex flex-col items-center">
+          <div className="mt-10 flex flex-col items-center">
             <div className="relative w-64 h-80 mb-8">
               <Image
                 src="/images/founders.jpg"
@@ -128,7 +128,7 @@ export default function AboutPage() {
       </section>
 
       {/* CTA */}
-      <section className="bg-surface py-24 md:py-32">
+      <section className="bg-surface py-14 md:py-20">
         <div className="max-w-2xl mx-auto px-6 text-center">
           <h2 className="font-serif text-3xl md:text-4xl font-light mb-10">
             Let&apos;s Create Something Beautiful
