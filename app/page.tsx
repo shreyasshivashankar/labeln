@@ -53,7 +53,7 @@ export default async function Home() {
       </section>
 
       {/* Featured Collections */}
-      <section className="pb-24 md:pb-32">
+      <section className="py-24 md:py-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="flex justify-between items-end mb-12">
             <h2 className="font-serif text-3xl md:text-4xl font-light">Collections</h2>
