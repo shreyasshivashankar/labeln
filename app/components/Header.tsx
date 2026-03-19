@@ -85,7 +85,7 @@ export default function Header() {
               href="/contact"
               className="text-[11px] font-medium uppercase tracking-[0.2em] text-accent hover:opacity-70 transition-opacity"
             >
-              Get in Touch
+              Atelier
             </Link>
             {!loading &&
               (user ? (
@@ -155,7 +155,7 @@ export default function Header() {
               className="text-[12px] font-medium uppercase tracking-[0.2em] text-accent hover:opacity-70 transition-opacity"
               onClick={() => setOpen(false)}
             >
-              Get in Touch
+              Atelier
             </Link>
             {!loading &&
               (user ? (

@@ -12,9 +12,6 @@ export default function Footer() {
             <Link href="/" className="font-logo text-xl tracking-[0.15em] font-normal">
               LABEL N
             </Link>
-            <p className="mt-4 text-text-secondary text-xs leading-relaxed max-w-xs">
-              Label N
-            </p>
           </div>
 
           {/* Shop */}
