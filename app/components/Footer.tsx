@@ -36,16 +36,19 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Customer Services */}
+          {/* Get in Touch */}
           <div>
-            <h4 className="text-[11px] font-medium uppercase tracking-[0.2em] mb-5">Customer Services</h4>
-            <ul className="space-y-3">
-              <li>
-                <Link href="/contact" className="text-text-secondary text-xs hover:text-primary transition-colors">
-                  Contact Us
-                </Link>
-              </li>
-            </ul>
+            <h4 className="text-[11px] font-medium uppercase tracking-[0.2em] mb-5">Get in Touch</h4>
+            <a href="mailto:labelnllc@gmail.com" className="text-text-secondary text-xs hover:text-primary transition-colors">
+              labelnllc@gmail.com
+            </a>
+            <p className="text-text-secondary text-[10px] mt-1 mb-5">Response within 24 hours</p>
+            <Link
+              href="/contact"
+              className="text-[11px] font-medium uppercase tracking-[0.2em] border-b border-primary pb-0.5 hover:opacity-50 transition-opacity"
+            >
+              Contact Us
+            </Link>
           </div>
 
           {/* The Brand */}
