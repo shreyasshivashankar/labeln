@@ -63,7 +63,8 @@ export default function MeasurementForm() {
     ...(hasCustom ? [{ id: 'custom', label: 'Custom', fields: [] }] : []),
   ];
 
-  const currentTab = allTabs.find((t) => t.id === activeTab) ?? allTabs[0];
+  const currentTab = allTabs.find((t) => t.id === activeTab) ?? allTabs[0]!;
+  if (!currentTab) return null;
 
   return (
     <div className="bg-gray-50 p-8 rounded-lg">
