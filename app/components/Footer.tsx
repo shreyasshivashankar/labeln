@@ -52,17 +52,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="/returns" className="text-text-secondary text-xs hover:text-primary transition-colors">
-                  Returns
-                </Link>
-              </li>
-              <li>
-                <Link href="/stockists" className="text-text-secondary text-xs hover:text-primary transition-colors">
-                  Stockists
-                </Link>
-              </li>
-              <li>
-                <Link href="/store-locator" className="text-text-secondary text-xs hover:text-primary transition-colors">
-                  Store Locator
+                  Returns &amp; Refunds
                 </Link>
               </li>
             </ul>
@@ -78,16 +68,6 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/faq" className="text-text-secondary text-xs hover:text-primary transition-colors">
-                  FAQ
-                </Link>
-              </li>
-              <li>
-                <Link href="/careers" className="text-text-secondary text-xs hover:text-primary transition-colors">
-                  Careers
-                </Link>
-              </li>
-              <li>
                 <Link href="/terms" className="text-text-secondary text-xs hover:text-primary transition-colors">
                   Terms of Service
                 </Link>
@@ -95,16 +75,6 @@ export default function Footer() {
               <li>
                 <Link href="/privacy" className="text-text-secondary text-xs hover:text-primary transition-colors">
                   Privacy Policy
-                </Link>
-              </li>
-              <li>
-                <Link href="/cookies" className="text-text-secondary text-xs hover:text-primary transition-colors">
-                  Cookies
-                </Link>
-              </li>
-              <li>
-                <Link href="/sitemap" className="text-text-secondary text-xs hover:text-primary transition-colors">
-                  Site Map
                 </Link>
               </li>
             </ul>
@@ -116,7 +86,10 @@ export default function Footer() {
             <a href="mailto:labelnllc@gmail.com" className="text-text-secondary text-xs hover:text-primary transition-colors">
               labelnllc@gmail.com
             </a>
-            <p className="text-text-secondary text-[10px] mt-1 mb-5">Response within 24 hours</p>
+            <p className="text-text-secondary text-[10px] mt-1 mb-3">Response within 24 hours</p>
+            <a href="tel:+19727999072" className="text-text-secondary text-xs hover:text-primary transition-colors block mb-5">
+              (972) 799-9072
+            </a>
             <Link
               href="/contact"
               className="text-[11px] font-medium uppercase tracking-[0.2em] border-b border-primary pb-0.5 hover:opacity-50 transition-opacity"

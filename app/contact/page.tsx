@@ -2,8 +2,6 @@
 
 import { useState } from 'react';
 
-const CALENDLY_URL = process.env.NEXT_PUBLIC_CALENDLY_URL ?? 'https://calendly.com/labeln';
-
 export default function ContactPage() {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
@@ -90,17 +88,14 @@ export default function ContactPage() {
           <div className="mt-20 pt-12 border-t border-border grid grid-cols-1 md:grid-cols-2 gap-10">
             <div>
               <h3 className="text-[11px] font-medium uppercase tracking-[0.15em] mb-2">Email</h3>
-              <p className="text-text-secondary text-sm">info@labeln.com</p>
+              <a href="mailto:labelnllc@gmail.com" className="text-text-secondary text-sm hover:text-primary transition-colors">
+                labelnllc@gmail.com
+              </a>
             </div>
             <div>
-              <h3 className="text-[11px] font-medium uppercase tracking-[0.15em] mb-2">Consultation</h3>
-              <a
-                href={CALENDLY_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm border-b border-primary pb-0.5 hover:opacity-50 transition-opacity"
-              >
-                Schedule via Calendly
+              <h3 className="text-[11px] font-medium uppercase tracking-[0.15em] mb-2">Phone</h3>
+              <a href="tel:+19727999072" className="text-text-secondary text-sm hover:text-primary transition-colors">
+                (972) 799-9072
               </a>
             </div>
           </div>
