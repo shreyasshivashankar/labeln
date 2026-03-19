@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { getCollections, getProducts } from '@/lib/shopify';
+import { getCollections, getProducts, getCollectionByHandle } from '@/lib/shopify';
 import { mockCollections, mockProducts } from '../lib/mock-data';
 import CollectionCard from './components/CollectionCard';
 import ProductCard from './components/ProductCard';
@@ -22,6 +22,9 @@ async function getFeaturedCollections() {
 
 async function getBestSellers() {
   if (process.env.SHOPIFY_STORE_DOMAIN && process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN) {
+    const data = await getCollectionByHandle('best-sellers', 8);
+    if (data) return data.products;
+    // Fallback to generic products if collection doesn't exist yet
     return getProducts(4);
   }
   return mockProducts;
@@ -88,10 +91,10 @@ export default async function Home() {
           <div className="flex justify-between items-end mb-12">
             <h2 className="font-serif text-3xl md:text-4xl font-light">Best Sellers</h2>
             <Link
-              href="/collections"
+              href="/collections/best-sellers"
               className="text-[11px] font-medium uppercase tracking-[0.2em] hover:opacity-50 transition-opacity border-b border-primary pb-0.5"
             >
-              Shop All
+              Shop Best Sellers
             </Link>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
