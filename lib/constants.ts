@@ -109,10 +109,12 @@ export const POLICY = {
  * The Shopify value ("Custom") is still sent to cart/checkout.
  */
 export const VARIANT_DISPLAY_NAMES: Record<string, string> = {
+  C: 'Made to Measure',
   Custom: 'Made to Measure',
 };
 
 /** Check if a variant value represents a custom/made-to-measure order */
 export function isCustomVariant(value: string): boolean {
-  return value.toLowerCase() === 'custom';
+  const v = value.toLowerCase();
+  return v === 'custom' || v === 'c';
 }
