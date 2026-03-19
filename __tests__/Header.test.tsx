@@ -1,11 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import Header from '../app/components/Header';
 
-// Mock the AuthProvider hook
-jest.mock('../app/components/AuthProvider', () => ({
-  useAuth: jest.fn(),
-}));
-
 // Mock the CartProvider hook
 jest.mock('../app/components/CartProvider', () => ({
   useCart: jest.fn(() => ({
@@ -14,27 +9,18 @@ jest.mock('../app/components/CartProvider', () => ({
   })),
 }));
 
-import { useAuth } from '../app/components/AuthProvider';
-
 describe('Header', () => {
-  it('shows "Sign In" when the user is not authenticated', () => {
-    (useAuth as jest.Mock).mockReturnValue({ user: null, loading: false });
-
+  it('renders the logo and navigation links', () => {
     render(<Header />);
 
-    expect(screen.getByText('Sign In')).toBeInTheDocument();
-    expect(screen.queryByText('Profile')).not.toBeInTheDocument();
+    expect(screen.getByText('LABEL N')).toBeInTheDocument();
+    expect(screen.getByText('Shop')).toBeInTheDocument();
+    expect(screen.getByText('About')).toBeInTheDocument();
   });
 
-  it('shows "Profile" when the user is authenticated', () => {
-    (useAuth as jest.Mock).mockReturnValue({
-      user: { email: 'test@example.com' },
-      loading: false,
-    });
-
+  it('shows Made to Order link', () => {
     render(<Header />);
 
-    expect(screen.getByText('Profile')).toBeInTheDocument();
-    expect(screen.queryByText('Sign In')).not.toBeInTheDocument();
+    expect(screen.getAllByText('Made to Order').length).toBeGreaterThan(0);
   });
 });

@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { useState, useRef } from 'react';
-import { useAuth } from './AuthProvider';
 import { useCart } from './CartProvider';
 
 const NAV_LINKS = [
@@ -11,7 +10,6 @@ const NAV_LINKS = [
 ];
 
 export default function Header() {
-  const { user, loading } = useAuth();
   const { cart, openDrawer } = useCart();
   const [open, setOpen] = useState(false);
   const [coutureOpen, setCoutureOpen] = useState(false);
@@ -104,22 +102,6 @@ export default function Header() {
             >
               Made to Order
             </Link>
-            {!loading &&
-              (user ? (
-                <Link
-                  href="/profile"
-                  className="text-[11px] font-medium uppercase tracking-[0.2em] hover:opacity-50 transition-opacity"
-                >
-                  Account
-                </Link>
-              ) : (
-                <Link
-                  href="/auth/signin"
-                  className="text-[11px] font-medium uppercase tracking-[0.2em] hover:opacity-50 transition-opacity"
-                >
-                  Sign In
-                </Link>
-              ))}
             {CartIcon}
           </div>
 
@@ -174,24 +156,6 @@ export default function Header() {
             >
               Made to Order
             </Link>
-            {!loading &&
-              (user ? (
-                <Link
-                  href="/profile"
-                  className="text-[12px] font-medium uppercase tracking-[0.2em] hover:opacity-50 transition-opacity"
-                  onClick={() => setOpen(false)}
-                >
-                  Account
-                </Link>
-              ) : (
-                <Link
-                  href="/auth/signin"
-                  className="text-[12px] font-medium uppercase tracking-[0.2em] hover:opacity-50 transition-opacity"
-                  onClick={() => setOpen(false)}
-                >
-                  Sign In
-                </Link>
-              ))}
           </div>
         </div>
       )}

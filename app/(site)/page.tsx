@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { getCollections, getProducts, getCollectionByHandle } from '@/lib/shopify';
-import { mockCollections, mockProducts } from '../lib/mock-data';
-import CollectionCard from './components/CollectionCard';
-import ProductCard from './components/ProductCard';
-import VideoShowcase from './components/VideoShowcase';
+import { mockCollections, mockProducts } from '@/lib/mock-data';
+import CollectionCard from '@/app/components/CollectionCard';
+import ProductCard from '@/app/components/ProductCard';
+import VideoShowcase from '@/app/components/VideoShowcase';
 
 /** Pinned homepage collections — update handles here to change what's featured */
 const FEATURED_HANDLES = ['corsets', 'redefined-drapes-the-contemporary-edit', 'layered-fits'];
@@ -118,16 +118,10 @@ export default async function Home() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              href="/profile"
+              href="/contact"
               className="px-10 py-3.5 bg-primary text-white text-[11px] font-medium uppercase tracking-[0.25em] hover:bg-secondary transition-colors duration-300"
             >
-              My Measurements
-            </Link>
-            <Link
-              href="/contact"
-              className="px-10 py-3.5 border border-primary text-[11px] font-medium uppercase tracking-[0.25em] hover:bg-primary hover:text-white transition-all duration-300"
-            >
-              Book Consultation
+              Get in Touch
             </Link>
           </div>
         </div>

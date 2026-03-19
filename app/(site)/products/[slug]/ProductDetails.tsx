@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import type { ShopifyProduct } from '@/types/shopify';
-import AddToCartButton from '../../components/AddToCartButton';
+import AddToCartButton from '@/app/components/AddToCartButton';
 
 interface Props {
   product: ShopifyProduct;

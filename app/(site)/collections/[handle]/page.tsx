@@ -1,8 +1,8 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { getCollectionByHandle } from '@/lib/shopify';
-import { mockCollections, mockProducts } from '../../../lib/mock-data';
-import ProductCard from '../../components/ProductCard';
+import { mockCollections, mockProducts } from '@/lib/mock-data';
+import ProductCard from '@/app/components/ProductCard';
 
 async function getCollectionData(handle: string) {
   if (process.env.SHOPIFY_STORE_DOMAIN && process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN) {

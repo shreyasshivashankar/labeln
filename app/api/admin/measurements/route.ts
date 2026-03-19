@@ -1,14 +1,23 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getAdminClient } from '../../../lib/supabaseAdmin';
+import { jwtVerify } from 'jose';
+import { getAdminClient } from '@/lib/supabaseAdmin';
 
-function isAdminAuthorized(request: NextRequest): boolean {
-  const token = request.headers.get('authorization')?.replace('Bearer ', '');
-  return token === process.env.ADMIN_SECRET;
+const SECRET = new TextEncoder().encode(process.env.ADMIN_SECRET || 'dev-secret');
+
+async function verifyAdmin(request: NextRequest): Promise<boolean> {
+  const token = request.cookies.get('admin_token')?.value;
+  if (!token) return false;
+  try {
+    await jwtVerify(token, SECRET);
+    return true;
+  } catch {
+    return false;
+  }
 }
 
-/** GET /api/measurements?email=... — admin only */
+/** GET /api/admin/measurements?email=... */
 export async function GET(request: NextRequest) {
-  if (!isAdminAuthorized(request)) {
+  if (!(await verifyAdmin(request))) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
@@ -36,9 +45,9 @@ export async function GET(request: NextRequest) {
   return NextResponse.json({ measurement: data?.[0] ?? null });
 }
 
-/** POST /api/measurements — admin only, create or update */
+/** POST /api/admin/measurements — create or update */
 export async function POST(request: NextRequest) {
-  if (!isAdminAuthorized(request)) {
+  if (!(await verifyAdmin(request))) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
@@ -65,7 +74,6 @@ export async function POST(request: NextRequest) {
 
   const existingRecord = existing?.[0];
   if (existingRecord) {
-    // Update existing record
     const { data, error } = await db
       .from('measurements')
       .update({
@@ -86,7 +94,6 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ measurement: data, action: 'updated' });
   }
 
-  // Create new record
   const { data, error } = await db
     .from('measurements')
     .insert({

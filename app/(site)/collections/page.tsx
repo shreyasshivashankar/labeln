@@ -1,6 +1,6 @@
 import { getCollections } from '@/lib/shopify';
-import { mockCollections } from '../../lib/mock-data';
-import CollectionCard from '../components/CollectionCard';
+import { mockCollections } from '@/lib/mock-data';
+import CollectionCard from '@/app/components/CollectionCard';
 
 async function getAllCollections() {
   if (process.env.SHOPIFY_STORE_DOMAIN && process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN) {
