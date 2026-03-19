@@ -1,29 +1,29 @@
 export const mockCollections = [
   {
     id: '1',
-    title: 'Bridal',
-    handle: 'bridal',
+    title: 'The Corset Core',
+    handle: 'the-corset-core',
     image: {
-      url: '/images/bridal.jpg',
-      altText: 'Bridal Collection',
+      url: '/images/corset-core.jpg',
+      altText: 'The Corset Core Collection',
     },
   },
   {
     id: '2',
-    title: 'Festive',
-    handle: 'festive',
+    title: 'Layered Fits',
+    handle: 'layered-fits',
     image: {
-      url: '/images/festive.jpg',
-      altText: 'Festive Collection',
+      url: '/images/layered-fits.jpg',
+      altText: 'Layered Fits Collection',
     },
   },
   {
     id: '3',
-    title: 'Contemporary',
-    handle: 'contemporary',
+    title: 'Drape Theory',
+    handle: 'drape-theory',
     image: {
-      url: '/images/contemporary.jpg',
-      altText: 'Contemporary Collection',
+      url: '/images/drape-theory.jpg',
+      altText: 'Drape Theory Collection',
     },
   },
 ];
