@@ -215,7 +215,15 @@ export async function getCollections(first = 10) {
         image: coverImage ?? col.image,
       };
     })
-    .filter((c) => c.handle !== 'frontpage' && c.handle !== 'shop-all' && c.handle !== 'all')
+    .filter((c) => {
+      const h = c.handle.toLowerCase();
+      const t = c.title.toLowerCase();
+      // Exclude system/virtual collections
+      if (h === 'frontpage') return false;
+      if (h.includes('shop-all') || h === 'all') return false;
+      if (t === 'shop all' || t === 'all') return false;
+      return true;
+    })
     .slice(0, first);
 }
 
