@@ -11,12 +11,11 @@ export default function AboutPage() {
   return (
     <main>
       {/* Hero */}
-      <section className="bg-surface py-24 md:py-32">
+      <section className="bg-surface py-16 md:py-20">
         <div className="max-w-3xl mx-auto px-6 text-center">
           <p className="text-[11px] font-medium uppercase tracking-[0.3em] text-secondary mb-6">
             Our Story
           </p>
-          <h1 className="font-serif text-5xl md:text-6xl font-light mb-8">About Label N</h1>
           <p className="font-serif text-xl md:text-2xl font-light text-text-secondary leading-relaxed italic">
             Where thread meets thought, and tradition finds tomorrow.
           </p>
