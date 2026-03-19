@@ -170,8 +170,11 @@ export async function getProducts(first = 20) {
 export async function getCollections(first = 10) {
   const data = await shopifyFetch<{
     collections: { edges: Array<{ node: ShopifyCollection }> };
-  }>(collectionsQuery, { first });
-  return data.collections.edges.map((e) => e.node);
+  }>(collectionsQuery, { first: first + 5 });
+  return data.collections.edges
+    .map((e) => e.node)
+    .filter((c) => c.handle !== 'frontpage')
+    .slice(0, first);
 }
 
 export async function getCollectionByHandle(handle: string, productsFirst = 20) {
