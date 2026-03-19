@@ -37,9 +37,14 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Invalid HMAC' }, { status: 401 });
   }
 
-  // Product changes → invalidate cache so pages reflect updated data
+  // Product changes → invalidate all product caches
   if (topic?.startsWith('products/')) {
+    const payload = JSON.parse(rawBody) as { handle?: string };
     revalidateTag('shopify', 'max');
+    revalidateTag('products', 'max');
+    if (payload.handle) {
+      revalidateTag(`product-${payload.handle}`, 'max');
+    }
   }
 
   return NextResponse.json({ received: true });
