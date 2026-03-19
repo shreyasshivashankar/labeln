@@ -4,7 +4,7 @@ export const mockCollections = [
     title: 'Bridal',
     handle: 'bridal',
     image: {
-      url: '/images/collection-bridal.jpg',
+      url: '/images/bridal.jpg',
       altText: 'Bridal Collection',
     },
   },
@@ -13,7 +13,7 @@ export const mockCollections = [
     title: 'Festive',
     handle: 'festive',
     image: {
-      url: '/images/collection-festive.jpg',
+      url: '/images/festive.jpg',
       altText: 'Festive Collection',
     },
   },
@@ -22,7 +22,7 @@ export const mockCollections = [
     title: 'Contemporary',
     handle: 'contemporary',
     image: {
-      url: '/images/collection-contemporary.jpg',
+      url: '/images/contemporary.jpg',
       altText: 'Contemporary Collection',
     },
   },
@@ -43,7 +43,7 @@ export const mockProducts = [
       edges: [
         {
           node: {
-            url: '/images/product-lehengga.jpg',
+            url: '/images/lehengga.jpg',
             altText: 'Silk Lehengga',
           },
         },
@@ -64,7 +64,7 @@ export const mockProducts = [
       edges: [
         {
           node: {
-            url: '/images/product-anarkali.jpg',
+            url: '/images/anarkali.jpg',
             altText: 'Embroidered Anarkali',
           },
         },
@@ -85,7 +85,7 @@ export const mockProducts = [
       edges: [
         {
           node: {
-            url: '/images/product-saree-blouse.jpg',
+            url: '/images/saree-blouse.jpg',
             altText: 'Zardosi Saree Blouse',
           },
         },
@@ -106,7 +106,7 @@ export const mockProducts = [
       edges: [
         {
           node: {
-            url: '/images/product-kurta.jpg',
+            url: '/images/kurta.jpg',
             altText: 'Hand-Woven Kurta',
           },
         },

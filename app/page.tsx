@@ -30,7 +30,7 @@ export default async function Home() {
       {/* Hero — full bleed editorial */}
       <section className="relative h-screen min-h-[600px]">
         <Image
-          src="/images/hero.jpg"
+          src="/images/backdrop.jpg"
           alt="South Asian couture"
           fill
           className="object-cover"
