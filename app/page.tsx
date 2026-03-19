@@ -52,16 +52,6 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Brand statement */}
-      <section className="py-24 md:py-32">
-        <div className="max-w-3xl mx-auto px-6 text-center">
-          <p className="font-serif text-2xl md:text-3xl lg:text-4xl font-light leading-relaxed text-text-primary">
-            Where heritage meets the modern wardrobe. Every garment crafted with intention,
-            precision, and love.
-          </p>
-        </div>
-      </section>
-
       {/* Featured Collections */}
       <section className="pb-24 md:pb-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
