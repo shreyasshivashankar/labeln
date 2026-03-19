@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import type { ShopifyProduct } from '@/types/shopify';
 import AddToCartButton from '@/app/components/AddToCartButton';
+import { VARIANT_DISPLAY_NAMES, isCustomVariant } from '@/lib/constants';
 
 interface Props {
   product: ShopifyProduct;
@@ -34,7 +35,7 @@ export default function ProductDetails({ product }: Props) {
 
   // Check if a "Custom" variant is selected
   const isCustomSelected = Object.values(selectedOptions).some(
-    (v) => v.toLowerCase() === 'custom'
+    (v) => isCustomVariant(v)
   );
 
   // Filter out internal tags
@@ -60,6 +61,7 @@ export default function ProductDetails({ product }: Props) {
           <div className="flex flex-wrap gap-2">
             {option.values.map((value) => {
               const isSelected = selectedOptions[option.name] === value;
+              const displayName = VARIANT_DISPLAY_NAMES[value] || value;
               return (
                 <button
                   key={value}
@@ -70,7 +72,7 @@ export default function ProductDetails({ product }: Props) {
                       : 'border-border hover:border-primary'
                   }`}
                 >
-                  {value}
+                  {displayName}
                 </button>
               );
             })}

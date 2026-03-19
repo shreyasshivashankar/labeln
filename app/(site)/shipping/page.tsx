@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { BRAND } from '@/lib/constants';
 
 export const metadata: Metadata = {
   title: 'Shipping | Label N',
@@ -65,8 +66,8 @@ export default function ShippingPage() {
               <p className="mt-4">
                 If you haven&apos;t received your order within 14 days of receiving your shipping
                 confirmation email, please contact us at{' '}
-                <a href="mailto:labelnllc@gmail.com" className="text-primary border-b border-primary pb-0.5 hover:opacity-50 transition-opacity">
-                  labelnllc@gmail.com
+                <a href={`mailto:${BRAND.email}`} className="text-primary border-b border-primary pb-0.5 hover:opacity-50 transition-opacity">
+                  {BRAND.email}
                 </a>{' '}
                 with your name and order number, and we will look into it for you.
               </p>

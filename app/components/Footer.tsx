@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { BRAND } from '@/lib/constants';
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -83,12 +84,12 @@ export default function Footer() {
           {/* Get in Touch */}
           <div>
             <h4 className="text-[11px] font-medium uppercase tracking-[0.2em] mb-5">Get in Touch</h4>
-            <a href="mailto:labelnllc@gmail.com" className="text-text-secondary text-xs hover:text-primary transition-colors">
-              labelnllc@gmail.com
+            <a href={`mailto:${BRAND.email}`} className="text-text-secondary text-xs hover:text-primary transition-colors">
+              {BRAND.email}
             </a>
             <p className="text-text-secondary text-[10px] mt-1 mb-3">Response within 24 hours</p>
-            <a href="tel:+19727999072" className="text-text-secondary text-xs hover:text-primary transition-colors block mb-5">
-              +1 (972) 799-9072
+            <a href={BRAND.phoneTel} className="text-text-secondary text-xs hover:text-primary transition-colors block mb-5">
+              {BRAND.phone}
             </a>
             <Link
               href="/contact"
@@ -101,7 +102,7 @@ export default function Footer() {
 
         <div className="border-t border-border mt-16 pt-8 text-center">
           <p className="text-text-secondary text-[10px] uppercase tracking-[0.2em]">
-            &copy; {year} Label N. All rights reserved.
+            &copy; {year} {BRAND.name}. All rights reserved.
           </p>
         </div>
       </div>

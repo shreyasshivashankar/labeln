@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { BRAND } from '@/lib/constants';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy | Label N',
@@ -125,8 +126,8 @@ export default function PrivacyPage() {
               <p>
                 Should you have any questions about our privacy practices or this Privacy Policy,
                 please email us at{' '}
-                <a href="mailto:labelnllc@gmail.com" className="text-primary border-b border-primary pb-0.5 hover:opacity-50 transition-opacity">
-                  labelnllc@gmail.com
+                <a href={`mailto:${BRAND.email}`} className="text-primary border-b border-primary pb-0.5 hover:opacity-50 transition-opacity">
+                  {BRAND.email}
                 </a>{' '}
                 or contact us at 1378 Bridle Boulevard, Frisco, TX 75036, US.
               </p>

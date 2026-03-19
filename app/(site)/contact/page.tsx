@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { BRAND } from '@/lib/constants';
 
 export default function ContactPage() {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
@@ -88,14 +89,14 @@ export default function ContactPage() {
           <div className="mt-20 pt-12 border-t border-border grid grid-cols-1 md:grid-cols-2 gap-10">
             <div>
               <h3 className="text-[11px] font-medium uppercase tracking-[0.15em] mb-2">Email</h3>
-              <a href="mailto:labelnllc@gmail.com" className="text-text-secondary text-sm hover:text-primary transition-colors">
-                labelnllc@gmail.com
+              <a href={`mailto:${BRAND.email}`} className="text-text-secondary text-sm hover:text-primary transition-colors">
+                {BRAND.email}
               </a>
             </div>
             <div>
               <h3 className="text-[11px] font-medium uppercase tracking-[0.15em] mb-2">Phone</h3>
-              <a href="tel:+19727999072" className="text-text-secondary text-sm hover:text-primary transition-colors">
-                (972) 799-9072
+              <a href={BRAND.phoneTel} className="text-text-secondary text-sm hover:text-primary transition-colors">
+                {BRAND.phone}
               </a>
             </div>
           </div>
