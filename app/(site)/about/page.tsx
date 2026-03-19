@@ -71,7 +71,7 @@ export default function AboutPage() {
             <div>
               <p className="font-serif text-4xl font-light mb-3">Made to Measure</p>
               <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-text-secondary">
-                Tailored to You
+                Tailored for You
               </p>
             </div>
           </div>
