@@ -6,9 +6,16 @@ import CollectionCard from './components/CollectionCard';
 import ProductCard from './components/ProductCard';
 import VideoShowcase from './components/VideoShowcase';
 
+/** Pinned homepage collections — update handles here to change what's featured */
+const FEATURED_HANDLES = ['corsets', 'redefined-drapes-the-contemporary-edit', 'coord-sets'];
+
 async function getFeaturedCollections() {
   if (process.env.SHOPIFY_STORE_DOMAIN && process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN) {
-    return getCollections(3);
+    const all = await getCollections(20);
+    const pinned = FEATURED_HANDLES
+      .map((h) => all.find((c) => c.handle === h))
+      .filter(Boolean);
+    return pinned.length > 0 ? pinned : all.slice(0, 3);
   }
   return mockCollections;
 }
