@@ -15,8 +15,8 @@ async function verifyAdmin(request: NextRequest): Promise<boolean> {
   }
 }
 
-/** POST /api/admin/measurements/bulk — get status for multiple orders */
-export async function POST(request: NextRequest) {
+/** GET /api/admin/measurements/all — list all measurement records */
+export async function GET(request: NextRequest) {
   if (!(await verifyAdmin(request))) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
@@ -26,18 +26,14 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Database not configured' }, { status: 503 });
   }
 
-  const { order_ids } = await request.json();
-  if (!Array.isArray(order_ids) || order_ids.length === 0) {
-    return NextResponse.json({ records: [] });
-  }
-
   const { data, error } = await db
     .from('measurements')
-    .select('shopify_order_id, status, values')
-    .in('shopify_order_id', order_ids);
+    .select('*')
+    .order('created_at', { ascending: false })
+    .limit(100);
 
   if (error) {
-    return NextResponse.json({ error: 'Failed to fetch' }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to fetch records' }, { status: 500 });
   }
 
   return NextResponse.json({ records: data ?? [] });
