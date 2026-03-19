@@ -43,12 +43,25 @@ export default async function CollectionsPage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {/* Shop All — always first */}
               <Link href="/collections/all" className="group block">
-                <div className="relative w-full aspect-[3/4] overflow-hidden bg-primary">
-                  <div className="absolute inset-0 group-hover:bg-black/10 transition-colors duration-500" />
-                  <div className="absolute inset-0 flex items-end p-6 md:p-8">
-                    <h3 className="text-white font-serif text-2xl md:text-3xl font-light tracking-wide">
+                <div className="relative w-full aspect-[3/4] overflow-hidden bg-white border border-border">
+                  {/* Subtle decorative elements */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-[0.04]">
+                    <span className="font-serif text-[12rem] md:text-[16rem] font-light select-none leading-none tracking-tight">N</span>
+                  </div>
+                  <div className="absolute top-6 left-6 right-6 md:top-8 md:left-8 md:right-8">
+                    <div className="w-8 h-px bg-primary/20" />
+                  </div>
+                  <div className="absolute bottom-6 right-6 md:bottom-8 md:right-8">
+                    <div className="w-8 h-px bg-primary/20" />
+                  </div>
+                  <div className="absolute inset-0 flex flex-col items-center justify-center group-hover:bg-surface/50 transition-colors duration-500">
+                    <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-secondary mb-3">
+                      Explore
+                    </p>
+                    <h3 className="font-serif text-2xl md:text-3xl font-light tracking-wide text-primary">
                       Shop All
                     </h3>
+                    <div className="mt-4 w-6 h-px bg-primary/30 group-hover:w-10 transition-all duration-500" />
                   </div>
                 </div>
               </Link>

@@ -215,7 +215,7 @@ export async function getCollections(first = 10) {
         image: coverImage ?? col.image,
       };
     })
-    .filter((c) => c.handle !== 'frontpage')
+    .filter((c) => c.handle !== 'frontpage' && c.handle !== 'shop-all' && c.handle !== 'all')
     .slice(0, first);
 }
 
