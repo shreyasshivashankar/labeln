@@ -28,7 +28,7 @@ export default async function Home() {
   return (
     <main>
       {/* Hero — full bleed editorial */}
-      <section className="relative h-screen min-h-[600px]">
+      <section className="relative w-full" style={{ aspectRatio: '1868 / 1680' }}>
         <Image
           src="/images/backdrop.jpg"
           alt="South Asian couture"
