@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
-import { BRAND } from '@/lib/constants';
+import { BRAND, CONTACT, CONTACT_ADDRESS_FULL, POLICY, SEO } from '@/lib/constants';
 
 export const metadata: Metadata = {
-  title: 'Returns & Refunds | Label N',
-  description: 'Label N return and refund policy for ready-to-wear and custom outfits.',
+  title: `Returns & Refunds | ${BRAND.name}`,
+  description: SEO.returns,
 };
 
 export default function ReturnsPage() {
@@ -28,7 +28,7 @@ export default function ReturnsPage() {
                 following specific timelines and exceptions:
               </p>
               <ul className="list-disc pl-5 space-y-2">
-                <li><strong className="text-primary">Ready-to-wear items:</strong> Eligible for return within 7 days of delivery.</li>
+                <li><strong className="text-primary">Ready-to-wear items:</strong> Eligible for return within {POLICY.returnWindow} of delivery.</li>
                 <li><strong className="text-primary">Custom outfits:</strong> Because these are made specifically to your measurements and specifications, they are strictly final sale and cannot be returned or exchanged.</li>
               </ul>
               <p className="mt-4">
@@ -42,7 +42,7 @@ export default function ReturnsPage() {
               <h2 className="text-primary font-serif text-2xl font-light mb-4">Return Shipping &amp; Restocking</h2>
               <p>
                 We are pleased to offer free return shipping. Please note that all returns are subject
-                to a 3% restocking fee, which will be automatically deducted from your final refund
+                to a {POLICY.restockingFee} restocking fee, which will be automatically deducted from your final refund
                 amount.
               </p>
             </div>
@@ -51,12 +51,12 @@ export default function ReturnsPage() {
               <h2 className="text-primary font-serif text-2xl font-light mb-4">How to Start a Return</h2>
               <p className="mb-4">
                 To start a return, please contact us at{' '}
-                <a href={`mailto:${BRAND.email}`} className="text-primary border-b border-primary pb-0.5 hover:opacity-50 transition-opacity">
-                  {BRAND.email}
+                <a href={`mailto:${CONTACT.email}`} className="text-primary border-b border-primary pb-0.5 hover:opacity-50 transition-opacity">
+                  {CONTACT.email}
                 </a>. Returns will need to be sent to the following address:
               </p>
               <p className="text-primary">
-                1378 Bridle Blvd, Frisco TX 75033
+                {CONTACT_ADDRESS_FULL}
               </p>
               <p className="mt-4">
                 If your return is accepted, we will send you a free return shipping label, as well as
@@ -106,15 +106,15 @@ export default function ReturnsPage() {
               <p>
                 We will notify you once we have received and inspected your return, and let you know
                 if the refund was approved. If approved, you will be automatically refunded on your
-                original payment method (minus the 3% restocking fee) within 10 business days. Please
+                original payment method (minus the {POLICY.restockingFee} restocking fee) within 10 business days. Please
                 remember it can take some time for your bank or credit card company to process the
                 refund.
               </p>
               <p className="mt-4">
                 If more than 15 business days have passed since we approved your return, please
                 contact us at{' '}
-                <a href={`mailto:${BRAND.email}`} className="text-primary border-b border-primary pb-0.5 hover:opacity-50 transition-opacity">
-                  {BRAND.email}
+                <a href={`mailto:${CONTACT.email}`} className="text-primary border-b border-primary pb-0.5 hover:opacity-50 transition-opacity">
+                  {CONTACT.email}
                 </a>.
               </p>
             </div>

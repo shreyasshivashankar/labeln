@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
-import { BRAND } from '@/lib/constants';
+import { BRAND, CONTACT, SEO } from '@/lib/constants';
 
 export const metadata: Metadata = {
-  title: 'Terms of Service | Label N',
-  description: 'Label N terms of service, including product policies and custom order terms.',
+  title: `Terms of Service | ${BRAND.name}`,
+  description: SEO.terms,
 };
 
 export default function TermsPage() {
@@ -24,8 +24,8 @@ export default function TermsPage() {
             <div>
               <h2 className="text-primary font-serif text-2xl font-light mb-4">Overview</h2>
               <p>
-                This website is operated by Label N. Throughout the site, the terms &ldquo;we&rdquo;,
-                &ldquo;us&rdquo; and &ldquo;our&rdquo; refer to Label N. We offer this website,
+                This website is operated by {BRAND.name}. Throughout the site, the terms &ldquo;we&rdquo;,
+                &ldquo;us&rdquo; and &ldquo;our&rdquo; refer to {BRAND.name}. We offer this website,
                 including all information, tools, and services available from this site to you, the
                 user, conditioned upon your acceptance of all terms, conditions, policies, and notices
                 stated here.
@@ -67,8 +67,8 @@ export default function TermsPage() {
               <h2 className="text-primary font-serif text-2xl font-light mb-4">Contact</h2>
               <p>
                 Questions about the Terms of Service should be sent to us at{' '}
-                <a href={`mailto:${BRAND.email}`} className="text-primary border-b border-primary pb-0.5 hover:opacity-50 transition-opacity">
-                  {BRAND.email}
+                <a href={`mailto:${CONTACT.email}`} className="text-primary border-b border-primary pb-0.5 hover:opacity-50 transition-opacity">
+                  {CONTACT.email}
                 </a>.
               </p>
             </div>

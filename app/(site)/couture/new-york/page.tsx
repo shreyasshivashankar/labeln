@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
+import { BRAND } from '@/lib/constants';
 
 export const metadata: Metadata = {
-  title: 'Couture — New York | Label N',
-  description: 'Label N Couture in New York. Coming soon.',
+  title: `Couture — New York | ${BRAND.name}`,
+  description: `${BRAND.name} Couture in New York. Coming soon.`,
 };
 
 export default function CoutureNewYorkPage() {

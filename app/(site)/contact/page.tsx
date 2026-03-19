@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { BRAND } from '@/lib/constants';
+import { CONTACT } from '@/lib/constants';
 
 export default function ContactPage() {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
@@ -33,7 +33,7 @@ export default function ContactPage() {
             <div className="text-center py-12">
               <p className="font-serif text-2xl font-light mb-4">Thank you</p>
               <p className="text-text-secondary text-sm">
-                We&apos;ve received your message and will respond within 24 hours.
+                We&apos;ve received your message and will respond within {CONTACT.responseTime}.
               </p>
             </div>
           ) : (
@@ -89,14 +89,14 @@ export default function ContactPage() {
           <div className="mt-20 pt-12 border-t border-border grid grid-cols-1 md:grid-cols-2 gap-10">
             <div>
               <h3 className="text-[11px] font-medium uppercase tracking-[0.15em] mb-2">Email</h3>
-              <a href={`mailto:${BRAND.email}`} className="text-text-secondary text-sm hover:text-primary transition-colors">
-                {BRAND.email}
+              <a href={`mailto:${CONTACT.email}`} className="text-text-secondary text-sm hover:text-primary transition-colors">
+                {CONTACT.email}
               </a>
             </div>
             <div>
               <h3 className="text-[11px] font-medium uppercase tracking-[0.15em] mb-2">Phone</h3>
-              <a href={BRAND.phoneTel} className="text-text-secondary text-sm hover:text-primary transition-colors">
-                {BRAND.phone}
+              <a href={CONTACT.phoneTel} className="text-text-secondary text-sm hover:text-primary transition-colors">
+                {CONTACT.phone}
               </a>
             </div>
           </div>

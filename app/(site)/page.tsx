@@ -5,14 +5,12 @@ import { mockCollections, mockProducts } from '@/lib/mock-data';
 import CollectionCard from '@/app/components/CollectionCard';
 import ProductCard from '@/app/components/ProductCard';
 import VideoShowcase from '@/app/components/VideoShowcase';
-
-/** Pinned homepage collections — update handles here to change what's featured */
-const FEATURED_HANDLES = ['corsets', 'redefined-drapes-the-contemporary-edit', 'layered-fits'];
+import { BRAND, FEATURED_COLLECTION_HANDLES, BEST_SELLERS_HANDLE } from '@/lib/constants';
 
 async function getFeaturedCollections() {
   if (process.env.SHOPIFY_STORE_DOMAIN && process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN) {
     const all = await getCollections(20);
-    const pinned = FEATURED_HANDLES
+    const pinned = FEATURED_COLLECTION_HANDLES
       .map((h) => all.find((c) => c.handle === h))
       .filter((c): c is NonNullable<typeof c> => c != null);
     return pinned.length > 0 ? pinned : all.slice(0, 3);
@@ -22,9 +20,8 @@ async function getFeaturedCollections() {
 
 async function getBestSellers() {
   if (process.env.SHOPIFY_STORE_DOMAIN && process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN) {
-    const data = await getCollectionByHandle('best-sellers', 8);
+    const data = await getCollectionByHandle(BEST_SELLERS_HANDLE, 8);
     if (data) return data.products;
-    // Fallback to generic products if collection doesn't exist yet
     return getProducts(4);
   }
   return mockProducts;
@@ -42,7 +39,7 @@ export default async function Home() {
       <section className="relative w-full" style={{ aspectRatio: '1868 / 1680' }}>
         <Image
           src="/images/backdrop.jpg"
-          alt="South Asian couture"
+          alt={BRAND.tagline}
           fill
           className="object-cover"
           priority
@@ -51,7 +48,7 @@ export default async function Home() {
         <div className="absolute inset-0 bg-black/30" />
         <div className="relative z-10 flex flex-col items-center justify-end h-full pb-24 px-6 text-white text-center">
           <p className="text-sm md:text-base font-light tracking-[0.15em] uppercase max-w-lg">
-            The art of South Asian couture — made for you
+            {BRAND.tagline}
           </p>
           <Link
             href="/collections"
@@ -91,7 +88,7 @@ export default async function Home() {
           <div className="flex justify-between items-end mb-12">
             <h2 className="font-serif text-3xl md:text-4xl font-light">Best Sellers</h2>
             <Link
-              href="/collections/best-sellers"
+              href={`/collections/${BEST_SELLERS_HANDLE}`}
               className="text-[11px] font-medium uppercase tracking-[0.2em] hover:opacity-50 transition-opacity border-b border-primary pb-0.5"
             >
               Shop Best Sellers
@@ -113,7 +110,7 @@ export default async function Home() {
           </p>
           <h2 className="font-serif text-2xl sm:text-4xl md:text-5xl font-light mb-6">Made for You, Precisely</h2>
           <p className="text-text-secondary text-sm md:text-base leading-relaxed max-w-2xl mx-auto mb-12">
-            Every Label N garment is crafted to your exact measurements. Book a virtual consultation
+            Every {BRAND.name} garment is crafted to your exact measurements. Book a virtual consultation
             and our designers will guide you through a personal fitting over a video call.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -138,8 +135,7 @@ export default async function Home() {
               South Asian Roots,<br />Global Style
             </h2>
             <p className="text-text-secondary text-sm leading-relaxed mb-10 max-w-lg">
-              Label N is a contemporary South Asian brand redefining modern femininity through
-              sculpted silhouettes and conscious design.
+              {BRAND.description}
             </p>
             <Link
               href="/about"

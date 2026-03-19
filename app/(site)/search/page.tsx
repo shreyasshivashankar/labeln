@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
 import { searchProducts } from '@/lib/shopify';
 import ProductCard from '@/app/components/ProductCard';
+import { BRAND } from '@/lib/constants';
 
 export const metadata: Metadata = {
-  title: 'Search | Label N',
+  title: `Search | ${BRAND.name}`,
 };
 
 export default async function SearchPage({

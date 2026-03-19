@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import type { ShopifyProduct } from '@/types/shopify';
 import AddToCartButton from '@/app/components/AddToCartButton';
-import { VARIANT_DISPLAY_NAMES, isCustomVariant } from '@/lib/constants';
+import { VARIANT_DISPLAY_NAMES, isCustomVariant, POLICY } from '@/lib/constants';
 
 interface Props {
   product: ShopifyProduct;
@@ -91,7 +91,7 @@ export default function ProductDetails({ product }: Props) {
             <div className="pt-2 space-y-1.5">
               <p className="flex items-start gap-2">
                 <span className="text-accent mt-0.5">1.</span>
-                Place your order — we&apos;ll reach out within 24 hours
+                Place your order — we&apos;ll reach out within {POLICY.orderResponseTime}
               </p>
               <p className="flex items-start gap-2">
                 <span className="text-accent mt-0.5">2.</span>

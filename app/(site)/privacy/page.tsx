@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
-import { BRAND } from '@/lib/constants';
+import { BRAND, CONTACT, CONTACT_ADDRESS_FULL, SEO } from '@/lib/constants';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | Label N',
-  description: 'Label N privacy policy — how we collect, use, and protect your personal information.',
+  title: `Privacy Policy | ${BRAND.name}`,
+  description: SEO.privacy,
 };
 
 export default function PrivacyPage() {
@@ -23,9 +23,9 @@ export default function PrivacyPage() {
         <div className="max-w-2xl mx-auto px-6">
           <div className="space-y-12 text-text-secondary text-sm leading-[1.9]">
             <p>
-              Label N operates this store and website, including all related information, content,
+              {BRAND.name} operates this store and website, including all related information, content,
               features, tools, products and services, in order to provide you, the customer, with a
-              curated shopping experience (the &ldquo;Services&rdquo;). Label N is powered by Shopify,
+              curated shopping experience (the &ldquo;Services&rdquo;). {BRAND.name} is powered by Shopify,
               which enables us to provide the Services to you. This Privacy Policy describes how we
               collect, use, and disclose your personal information when you visit, use, or make a
               purchase or other transaction using the Services or otherwise communicate with us.
@@ -126,10 +126,10 @@ export default function PrivacyPage() {
               <p>
                 Should you have any questions about our privacy practices or this Privacy Policy,
                 please email us at{' '}
-                <a href={`mailto:${BRAND.email}`} className="text-primary border-b border-primary pb-0.5 hover:opacity-50 transition-opacity">
-                  {BRAND.email}
+                <a href={`mailto:${CONTACT.email}`} className="text-primary border-b border-primary pb-0.5 hover:opacity-50 transition-opacity">
+                  {CONTACT.email}
                 </a>{' '}
-                or contact us at 1378 Bridle Boulevard, Frisco, TX 75036, US.
+                or contact us at {CONTACT_ADDRESS_FULL}.
               </p>
             </div>
           </div>

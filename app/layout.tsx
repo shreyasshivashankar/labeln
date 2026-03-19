@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Providers from "./components/Providers";
+import { SEO } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Label N",
-  description: "South Asian clothing brand",
+  title: SEO.siteTitle,
+  description: SEO.siteDescription,
 };
 
 export default function RootLayout({

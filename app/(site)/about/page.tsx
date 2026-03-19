@@ -1,10 +1,11 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import type { Metadata } from 'next';
+import { BRAND, FOUNDERS, SEO } from '@/lib/constants';
 
 export const metadata: Metadata = {
-  title: 'About | Label N',
-  description: 'The story behind Label N — bespoke South Asian couture by Nash & Anu.',
+  title: `About | ${BRAND.name}`,
+  description: SEO.about,
 };
 
 export default function AboutPage() {
@@ -28,7 +29,7 @@ export default function AboutPage() {
           <div className="space-y-6 text-text-secondary text-sm leading-[1.9]">
             <p>
               There is a quiet language in the way fabric falls — a whisper of hands that shaped it,
-              of stories stitched into every seam. Label N was born from that reverence. A belief that
+              of stories stitched into every seam. {BRAND.name} was born from that reverence. A belief that
               the garments we wear should carry meaning, not just beauty.
             </p>
             <p>
@@ -39,7 +40,7 @@ export default function AboutPage() {
               back home.
             </p>
             <p>
-              What we make is not fast. It is not mass-produced. Every Label N piece is made to your
+              What we make is not fast. It is not mass-produced. Every {BRAND.name} piece is made to your
               exact measurements — because we believe that couture should never ask you to conform.
               It should meet you where you are, and make you feel like the most considered version of
               yourself.
@@ -90,7 +91,7 @@ export default function AboutPage() {
 
           <div className="space-y-6 text-text-secondary text-sm leading-[1.9] italic">
             <p>
-              We started Label N with a simple dream — to create something that felt like home,
+              We started {BRAND.name} with a simple dream — to create something that felt like home,
               no matter where you wore it. Something that honored the hands that made it and the
               woman who chose it.
             </p>
@@ -100,7 +101,7 @@ export default function AboutPage() {
               We wanted to carry that forward, not as nostalgia, but as something alive and evolving.
             </p>
             <p>
-              Thank you for being part of this journey. When you wear Label N, you wear a piece
+              Thank you for being part of this journey. When you wear {BRAND.name}, you wear a piece
               of our story — and we hope it becomes a beautiful part of yours.
             </p>
           </div>
@@ -109,19 +110,19 @@ export default function AboutPage() {
           <div className="mt-10 flex flex-col items-center">
             <div className="relative w-64 h-80 mb-8">
               <Image
-                src="/images/founders.jpg"
-                alt="Nash & Anu — Founders of Label N"
+                src={FOUNDERS.photo}
+                alt={`${FOUNDERS.names} — ${FOUNDERS.title}`}
                 fill
                 className="object-cover"
                 sizes="256px"
               />
             </div>
             <p className="font-serif text-2xl font-light tracking-wide">
-              Nash &amp; Anu
+              {FOUNDERS.names}
             </p>
             <p className="font-serif text-lg text-secondary mt-1">&hearts;</p>
             <p className="text-[10px] uppercase tracking-[0.3em] text-text-secondary mt-3">
-              Founders, Label N
+              {FOUNDERS.title}
             </p>
           </div>
         </div>

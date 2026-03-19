@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { BRAND } from '@/lib/constants';
+import { BRAND, CONTACT, FOOTER_SHOP_LINKS } from '@/lib/constants';
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -11,7 +11,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
             <Link href="/" className="font-logo text-xl tracking-[0.15em] font-normal whitespace-nowrap">
-              LABEL N
+              {BRAND.name.toUpperCase()}
             </Link>
           </div>
 
@@ -19,21 +19,13 @@ export default function Footer() {
           <div>
             <h4 className="text-[11px] font-medium uppercase tracking-[0.2em] mb-5">Shop</h4>
             <ul className="space-y-3">
-              <li>
-                <Link href="/collections/corsets" className="text-text-secondary text-xs hover:text-primary transition-colors">
-                  The Corset Core
-                </Link>
-              </li>
-              <li>
-                <Link href="/collections/redefined-drapes-the-contemporary-edit" className="text-text-secondary text-xs hover:text-primary transition-colors">
-                  Drape Theory
-                </Link>
-              </li>
-              <li>
-                <Link href="/collections/layered-fits" className="text-text-secondary text-xs hover:text-primary transition-colors">
-                  Layered Fits
-                </Link>
-              </li>
+              {FOOTER_SHOP_LINKS.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="text-text-secondary text-xs hover:text-primary transition-colors">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -84,12 +76,12 @@ export default function Footer() {
           {/* Get in Touch */}
           <div>
             <h4 className="text-[11px] font-medium uppercase tracking-[0.2em] mb-5">Get in Touch</h4>
-            <a href={`mailto:${BRAND.email}`} className="text-text-secondary text-xs hover:text-primary transition-colors">
-              {BRAND.email}
+            <a href={`mailto:${CONTACT.email}`} className="text-text-secondary text-xs hover:text-primary transition-colors">
+              {CONTACT.email}
             </a>
-            <p className="text-text-secondary text-[10px] mt-1 mb-3">Response within 24 hours</p>
-            <a href={BRAND.phoneTel} className="text-text-secondary text-xs hover:text-primary transition-colors block mb-5">
-              {BRAND.phone}
+            <p className="text-text-secondary text-[10px] mt-1 mb-3">Response within {CONTACT.responseTime}</p>
+            <a href={CONTACT.phoneTel} className="text-text-secondary text-xs hover:text-primary transition-colors block mb-5">
+              {CONTACT.phone}
             </a>
             <Link
               href="/contact"

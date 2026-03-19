@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useState, useRef, useEffect } from 'react';
 import { useCart } from './CartProvider';
+import { BRAND, COUTURE_LOCATIONS } from '@/lib/constants';
 
 const NAV_LINKS = [
   { href: '/collections', label: 'Shop' },
@@ -100,13 +101,16 @@ export default function Header() {
                   onMouseLeave={handleCoutureLeave}
                 >
                   <div className="bg-white border border-border shadow-sm py-2 min-w-[160px]">
-                    <Link
-                      href="/couture/new-york"
-                      className="block px-4 py-2 text-[11px] font-medium uppercase tracking-[0.15em] hover:bg-surface transition-colors"
-                      onClick={() => setCoutureOpen(false)}
-                    >
-                      New York
-                    </Link>
+                    {COUTURE_LOCATIONS.map((loc) => (
+                      <Link
+                        key={loc.href}
+                        href={loc.href}
+                        className="block px-4 py-2 text-[11px] font-medium uppercase tracking-[0.15em] hover:bg-surface transition-colors"
+                        onClick={() => setCoutureOpen(false)}
+                      >
+                        {loc.label}
+                      </Link>
+                    ))}
                   </div>
                 </div>
               )}
@@ -131,7 +135,7 @@ export default function Header() {
           <div className="flex justify-center">
             <Link href="/">
               <span className="font-logo text-xl sm:text-2xl lg:text-3xl tracking-[0.15em] font-normal whitespace-nowrap">
-                LABEL N
+                {BRAND.name.toUpperCase()}
               </span>
             </Link>
           </div>
@@ -192,13 +196,16 @@ export default function Header() {
                 {label}
               </Link>
             ))}
-            <Link
-              href="/couture/new-york"
-              className="text-[12px] font-medium uppercase tracking-[0.2em] hover:opacity-50 transition-opacity"
-              onClick={() => setOpen(false)}
-            >
-              Couture — New York
-            </Link>
+            {COUTURE_LOCATIONS.map((loc) => (
+              <Link
+                key={loc.href}
+                href={loc.href}
+                className="text-[12px] font-medium uppercase tracking-[0.2em] hover:opacity-50 transition-opacity"
+                onClick={() => setOpen(false)}
+              >
+                Couture — {loc.label}
+              </Link>
+            ))}
             <Link
               href="/contact"
               className="text-[12px] font-medium uppercase tracking-[0.2em] text-accent hover:opacity-70 transition-opacity"

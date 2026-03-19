@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import type { MeasurementRecord, MeasurementStatus, CustomField } from '@/types/measurements';
 import { STATUS_LABELS, STATUS_FLOW } from '@/types/measurements';
+import { BRAND } from '@/lib/constants';
 
 type View = 'list' | 'measure';
 
@@ -395,7 +396,7 @@ export default function AdminPage() {
                 <label className="block text-[11px] font-medium uppercase tracking-[0.15em] mb-2">Quick Actions</label>
                 <div className="flex gap-2">
                   {customerEmail && (
-                    <a href={`mailto:${customerEmail}?subject=Label N — Measurement Session for Order ${orderNumber}&body=Hi ${customerName || 'there'},%0D%0A%0D%0AThank you for your custom order ${orderNumber}! We'd love to schedule your measurement session.%0D%0A%0D%0APlease let us know a time that works for you, and we'll set up a quick video call to take your measurements.%0D%0A%0D%0AWarm regards,%0D%0ALabel N`}
+                    <a href={`mailto:${customerEmail}?subject=${BRAND.name} — Measurement Session for Order ${orderNumber}&body=Hi ${customerName || 'there'},%0D%0A%0D%0AThank you for your custom order ${orderNumber}! We'd love to schedule your measurement session.%0D%0A%0D%0APlease let us know a time that works for you, and we'll set up a quick video call to take your measurements.%0D%0A%0D%0AWarm regards,%0D%0A${BRAND.name}`}
                       className="px-4 py-3 text-[10px] font-medium uppercase tracking-[0.15em] border border-primary hover:bg-primary hover:text-white transition-all">
                       Email Customer
                     </a>
@@ -594,7 +595,7 @@ export default function AdminPage() {
   return (
     <div className="max-w-5xl mx-auto px-6 py-12">
       <div className="flex justify-between items-center mb-8">
-        <h1 className="font-serif text-3xl font-light">Label N Admin</h1>
+        <h1 className="font-serif text-3xl font-light">{BRAND.name} Admin</h1>
         <div className="flex items-center gap-4">
           <button onClick={() => setShowNewForm(true)}
             className="px-6 py-2.5 bg-primary text-white text-[11px] font-medium uppercase tracking-[0.2em] hover:bg-secondary transition-colors">

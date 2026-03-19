@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
+import { BRAND } from '@/lib/constants';
 
 export const metadata: Metadata = {
-  title: 'Admin | Label N',
+  title: `Admin | ${BRAND.name}`,
   robots: 'noindex, nofollow',
 };
 
