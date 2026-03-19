@@ -15,7 +15,7 @@ async function verifyAdmin(request: NextRequest): Promise<boolean> {
   }
 }
 
-/** GET /api/admin/measurements?order_id=... — get measurements for a Shopify order */
+/** GET /api/admin/measurements?order_id=... */
 export async function GET(request: NextRequest) {
   if (!(await verifyAdmin(request))) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -44,7 +44,7 @@ export async function GET(request: NextRequest) {
   return NextResponse.json({ measurement: data?.[0] ?? null });
 }
 
-/** POST /api/admin/measurements — create or update measurements for an order */
+/** POST /api/admin/measurements — create or update */
 export async function POST(request: NextRequest) {
   if (!(await verifyAdmin(request))) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -56,13 +56,15 @@ export async function POST(request: NextRequest) {
   }
 
   const body = await request.json();
-  const { shopify_order_id, order_number, customer_email, customer_name, values, custom_fields, notes } = body;
+  const {
+    shopify_order_id, order_number, customer_email, customer_name,
+    status, scheduled_date, values, custom_fields, notes,
+  } = body;
 
   if (!shopify_order_id) {
     return NextResponse.json({ error: 'shopify_order_id is required' }, { status: 400 });
   }
 
-  // Check if record already exists for this order
   const { data: existing } = await db
     .from('measurements')
     .select('id')
@@ -75,6 +77,8 @@ export async function POST(request: NextRequest) {
       .from('measurements')
       .update({
         customer_name: customer_name || null,
+        status: status || 'pending_measurement',
+        scheduled_date: scheduled_date || null,
         values: values || {},
         custom_fields: custom_fields || [],
         notes: notes || null,
@@ -98,6 +102,8 @@ export async function POST(request: NextRequest) {
       order_number: order_number || '',
       customer_email: (customer_email || '').toLowerCase(),
       customer_name: customer_name || null,
+      status: status || 'pending_measurement',
+      scheduled_date: scheduled_date || null,
       values: values || {},
       custom_fields: custom_fields || [],
       notes: notes || null,

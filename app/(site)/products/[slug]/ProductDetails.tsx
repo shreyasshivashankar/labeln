@@ -32,7 +32,12 @@ export default function ProductDetails({ product }: Props) {
   const price = selectedVariant?.price ?? product.priceRange.minVariantPrice;
   const formattedPrice = price.currencyCode === 'USD' ? `$${price.amount}` : `${price.amount} ${price.currencyCode}`;
 
-  // Filter out internal tags (like collection-cover)
+  // Check if a "Custom" variant is selected
+  const isCustomSelected = Object.values(selectedOptions).some(
+    (v) => v.toLowerCase() === 'custom'
+  );
+
+  // Filter out internal tags
   const displayTags = product.tags.filter((t) => t !== 'collection-cover');
 
   return (
@@ -72,6 +77,35 @@ export default function ProductDetails({ product }: Props) {
           </div>
         </div>
       ))}
+
+      {/* Custom order info banner */}
+      {isCustomSelected && (
+        <div className="mt-8 border border-accent/30 bg-accent/5 p-5">
+          <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-accent mb-3">
+            Made to Your Measurements
+          </p>
+          <div className="space-y-2 text-text-secondary text-xs leading-relaxed">
+            <p>This garment will be handcrafted to your exact measurements.</p>
+            <div className="pt-2 space-y-1.5">
+              <p className="flex items-start gap-2">
+                <span className="text-accent mt-0.5">1.</span>
+                Place your order — we&apos;ll reach out within 24 hours
+              </p>
+              <p className="flex items-start gap-2">
+                <span className="text-accent mt-0.5">2.</span>
+                Schedule a measurement session (video call or in-person)
+              </p>
+              <p className="flex items-start gap-2">
+                <span className="text-accent mt-0.5">3.</span>
+                Your piece is crafted in 2–3 weeks and shipped to you
+              </p>
+            </div>
+            <p className="pt-2 text-[10px] text-text-secondary/70">
+              Custom orders are final sale and cannot be returned or exchanged.
+            </p>
+          </div>
+        </div>
+      )}
 
       {/* Add to Cart */}
       {selectedVariant && (

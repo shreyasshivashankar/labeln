@@ -15,7 +15,7 @@ async function verifyAdmin(request: NextRequest): Promise<boolean> {
   }
 }
 
-/** POST /api/admin/measurements/bulk — check which orders have measurements */
+/** POST /api/admin/measurements/bulk — get status for multiple orders */
 export async function POST(request: NextRequest) {
   if (!(await verifyAdmin(request))) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -28,18 +28,17 @@ export async function POST(request: NextRequest) {
 
   const { order_ids } = await request.json();
   if (!Array.isArray(order_ids) || order_ids.length === 0) {
-    return NextResponse.json({ order_ids: [] });
+    return NextResponse.json({ records: [] });
   }
 
   const { data, error } = await db
     .from('measurements')
-    .select('shopify_order_id')
+    .select('shopify_order_id, status, values')
     .in('shopify_order_id', order_ids);
 
   if (error) {
     return NextResponse.json({ error: 'Failed to fetch' }, { status: 500 });
   }
 
-  const completedIds = (data ?? []).map((r: { shopify_order_id: string }) => r.shopify_order_id);
-  return NextResponse.json({ completed_order_ids: completedIds });
+  return NextResponse.json({ records: data ?? [] });
 }
