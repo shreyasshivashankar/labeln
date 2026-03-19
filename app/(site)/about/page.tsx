@@ -55,9 +55,6 @@ export default function AboutPage() {
       {/* Values */}
       <section className="bg-surface py-14 md:py-20">
         <div className="max-w-5xl mx-auto px-6">
-          <p className="text-[11px] font-medium uppercase tracking-[0.3em] text-text-secondary text-center mb-10">
-            To provide an elegant experience for every occasion
-          </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 text-center">
             <div>
               <p className="font-serif text-4xl font-light mb-3">Pret</p>
