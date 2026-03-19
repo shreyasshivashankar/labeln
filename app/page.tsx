@@ -141,12 +141,11 @@ export default async function Home() {
               Our Story
             </p>
             <h2 className="font-serif text-4xl md:text-5xl font-light mb-6">
-              South Asian Heritage,<br />Contemporary Design
+              South Asian Roots,<br />Global Style
             </h2>
             <p className="text-text-secondary text-sm leading-relaxed mb-10 max-w-lg">
-              Label N is where tradition meets the contemporary. We believe every garment should be
-              a perfect expression of who you are — handcrafted using time-honored techniques
-              and finished with modern sensibility.
+              Label N is a contemporary South Asian brand redefining modern femininity through
+              sculpted silhouettes and conscious design.
             </p>
             <Link
               href="/about"

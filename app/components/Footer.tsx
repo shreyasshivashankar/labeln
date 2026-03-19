@@ -13,7 +13,7 @@ export default function Footer() {
               LABEL N
             </Link>
             <p className="mt-4 text-text-secondary text-xs leading-relaxed max-w-xs">
-              Bespoke South Asian couture crafted with intention, precision, and heritage.
+              Label N
             </p>
           </div>
 

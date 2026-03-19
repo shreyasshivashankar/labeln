@@ -5,18 +5,16 @@ import { useState } from 'react';
 import { useAuth } from './AuthProvider';
 import { useCart } from './CartProvider';
 
-const CALENDLY_URL = process.env.NEXT_PUBLIC_CALENDLY_URL ?? 'https://calendly.com/labeln';
-
 const NAV_LINKS = [
   { href: '/collections', label: 'Shop' },
   { href: '/about', label: 'About' },
-  { href: '/contact', label: 'Contact' },
 ];
 
 export default function Header() {
   const { user, loading } = useAuth();
   const { cart, openDrawer } = useCart();
   const [open, setOpen] = useState(false);
+  const [coutureOpen, setCoutureOpen] = useState(false);
 
   const cartBadge = cart?.totalQuantity ?? 0;
 
@@ -49,6 +47,29 @@ export default function Header() {
                 {label}
               </Link>
             ))}
+            {/* Couture dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={() => setCoutureOpen(true)}
+              onMouseLeave={() => setCoutureOpen(false)}
+            >
+              <button className="text-[11px] font-medium uppercase tracking-[0.2em] hover:opacity-50 transition-opacity flex items-center gap-1">
+                Couture
+                <svg xmlns="http://www.w3.org/2000/svg" className={`h-3 w-3 transition-transform ${coutureOpen ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              {coutureOpen && (
+                <div className="absolute top-full left-0 mt-2 bg-white border border-border shadow-sm py-2 min-w-[160px]">
+                  <Link
+                    href="/couture/new-york"
+                    className="block px-4 py-2 text-[11px] font-medium uppercase tracking-[0.15em] hover:bg-surface transition-colors"
+                  >
+                    New York
+                  </Link>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Center logo */}
@@ -60,14 +81,12 @@ export default function Header() {
 
           {/* Right actions - desktop */}
           <div className="hidden lg:flex items-center gap-6">
-            <a
-              href={CALENDLY_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[11px] font-medium uppercase tracking-[0.2em] hover:opacity-50 transition-opacity"
+            <Link
+              href="/contact"
+              className="text-[11px] font-medium uppercase tracking-[0.2em] text-accent hover:opacity-70 transition-opacity"
             >
-              Consultation
-            </a>
+              Get in Touch
+            </Link>
             {!loading &&
               (user ? (
                 <Link
@@ -124,15 +143,20 @@ export default function Header() {
                 {label}
               </Link>
             ))}
-            <a
-              href={CALENDLY_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/couture/new-york"
               className="text-[12px] font-medium uppercase tracking-[0.2em] hover:opacity-50 transition-opacity"
               onClick={() => setOpen(false)}
             >
-              Consultation
-            </a>
+              Couture — New York
+            </Link>
+            <Link
+              href="/contact"
+              className="text-[12px] font-medium uppercase tracking-[0.2em] text-accent hover:opacity-70 transition-opacity"
+              onClick={() => setOpen(false)}
+            >
+              Get in Touch
+            </Link>
             {!loading &&
               (user ? (
                 <Link
