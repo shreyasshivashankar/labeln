@@ -30,7 +30,7 @@ async function getCachedProduct(handle: string) {
     vendor: '',
     tags: [],
     options: [],
-    priceRange: mock.priceRange,
+    priceRange: { minVariantPrice: mock.priceRange.minVariantPrice, maxVariantPrice: mock.priceRange.minVariantPrice },
     images: mock.images,
     variants: {
       edges: [{ node: { id: mock.id, title: 'Default', availableForSale: true, price: mock.priceRange.minVariantPrice, selectedOptions: [] } }],
