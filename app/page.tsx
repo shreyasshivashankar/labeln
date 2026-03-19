@@ -84,6 +84,19 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* Video Showcase */}
+      <section className="relative w-full overflow-hidden bg-black">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="w-full h-auto block"
+        >
+          <source src="/videos/showcase.mp4" type="video/mp4" />
+        </video>
+      </section>
+
       {/* Best Sellers */}
       <section className="py-24 md:py-32 bg-surface">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
