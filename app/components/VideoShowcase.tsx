@@ -21,7 +21,7 @@ export default function VideoShowcase() {
         - Mobile: show full portrait, natural aspect ratio
         - Desktop: crop to 16:9 landscape, video centered via object-cover
       */}
-      <div className="md:h-screen">
+      <div style={{ aspectRatio: '1868 / 1680' }}>
         <video
           ref={videoRef}
           autoPlay
