@@ -19,51 +19,45 @@ export default function Footer() {
             <h4 className="text-[11px] font-medium uppercase tracking-[0.2em] mb-5">Shop</h4>
             <ul className="space-y-3">
               <li>
-                <Link href="/collections" className="text-text-secondary text-xs hover:text-primary transition-colors">
-                  All Collections
+                <Link href="/collections/corsets" className="text-text-secondary text-xs hover:text-primary transition-colors">
+                  The Corset Core
                 </Link>
               </li>
               <li>
-                <Link href="/collections" className="text-text-secondary text-xs hover:text-primary transition-colors">
-                  New Arrivals
+                <Link href="/collections/redefined-drapes-the-contemporary-edit" className="text-text-secondary text-xs hover:text-primary transition-colors">
+                  Drape Theory
+                </Link>
+              </li>
+              <li>
+                <Link href="/collections/layered-fits" className="text-text-secondary text-xs hover:text-primary transition-colors">
+                  Layered Fits
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Company */}
+          {/* Customer Services */}
           <div>
-            <h4 className="text-[11px] font-medium uppercase tracking-[0.2em] mb-5">Company</h4>
+            <h4 className="text-[11px] font-medium uppercase tracking-[0.2em] mb-5">Customer Services</h4>
+            <ul className="space-y-3">
+              <li>
+                <Link href="/contact" className="text-text-secondary text-xs hover:text-primary transition-colors">
+                  Contact Us
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* The Brand */}
+          <div>
+            <h4 className="text-[11px] font-medium uppercase tracking-[0.2em] mb-5">The Brand</h4>
             <ul className="space-y-3">
               <li>
                 <Link href="/about" className="text-text-secondary text-xs hover:text-primary transition-colors">
                   About
                 </Link>
               </li>
-              <li>
-                <Link href="/contact" className="text-text-secondary text-xs hover:text-primary transition-colors">
-                  Contact
-                </Link>
-              </li>
-              <li>
-                <Link href="/profile" className="text-text-secondary text-xs hover:text-primary transition-colors">
-                  My Account
-                </Link>
-              </li>
             </ul>
-          </div>
-
-          {/* Contact */}
-          <div>
-            <h4 className="text-[11px] font-medium uppercase tracking-[0.2em] mb-5">Get in Touch</h4>
-            <p className="text-text-secondary text-xs mb-1">info@labeln.com</p>
-            <p className="text-text-secondary text-xs mb-5">Response within 24 hours</p>
-            <Link
-              href="/contact"
-              className="text-[11px] font-medium uppercase tracking-[0.2em] border-b border-primary pb-0.5 hover:opacity-50 transition-opacity"
-            >
-              Contact Us
-            </Link>
           </div>
         </div>
 

@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useAuth } from './AuthProvider';
 import { useCart } from './CartProvider';
 
@@ -15,8 +15,18 @@ export default function Header() {
   const { cart, openDrawer } = useCart();
   const [open, setOpen] = useState(false);
   const [coutureOpen, setCoutureOpen] = useState(false);
+  const coutureTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const cartBadge = cart?.totalQuantity ?? 0;
+
+  const handleCoutureEnter = () => {
+    if (coutureTimeout.current) clearTimeout(coutureTimeout.current);
+    setCoutureOpen(true);
+  };
+
+  const handleCoutureLeave = () => {
+    coutureTimeout.current = setTimeout(() => setCoutureOpen(false), 150);
+  };
 
   const CartIcon = (
     <button onClick={openDrawer} className="relative p-2 hover:opacity-60 transition-opacity" aria-label="Open cart">
@@ -50,8 +60,8 @@ export default function Header() {
             {/* Couture dropdown */}
             <div
               className="relative"
-              onMouseEnter={() => setCoutureOpen(true)}
-              onMouseLeave={() => setCoutureOpen(false)}
+              onMouseEnter={handleCoutureEnter}
+              onMouseLeave={handleCoutureLeave}
             >
               <button className="text-[11px] font-medium uppercase tracking-[0.2em] hover:opacity-50 transition-opacity flex items-center gap-1">
                 Couture
@@ -60,13 +70,20 @@ export default function Header() {
                 </svg>
               </button>
               {coutureOpen && (
-                <div className="absolute top-full left-0 mt-2 bg-white border border-border shadow-sm py-2 min-w-[160px]">
-                  <Link
-                    href="/couture/new-york"
-                    className="block px-4 py-2 text-[11px] font-medium uppercase tracking-[0.15em] hover:bg-surface transition-colors"
-                  >
-                    New York
-                  </Link>
+                <div
+                  className="absolute top-full left-0 pt-2"
+                  onMouseEnter={handleCoutureEnter}
+                  onMouseLeave={handleCoutureLeave}
+                >
+                  <div className="bg-white border border-border shadow-sm py-2 min-w-[160px]">
+                    <Link
+                      href="/couture/new-york"
+                      className="block px-4 py-2 text-[11px] font-medium uppercase tracking-[0.15em] hover:bg-surface transition-colors"
+                      onClick={() => setCoutureOpen(false)}
+                    >
+                      New York
+                    </Link>
+                  </div>
                 </div>
               )}
             </div>
@@ -85,7 +102,7 @@ export default function Header() {
               href="/contact"
               className="text-[11px] font-medium uppercase tracking-[0.2em] text-accent hover:opacity-70 transition-opacity"
             >
-              Atelier
+              Made to Order
             </Link>
             {!loading &&
               (user ? (
@@ -155,7 +172,7 @@ export default function Header() {
               className="text-[12px] font-medium uppercase tracking-[0.2em] text-accent hover:opacity-70 transition-opacity"
               onClick={() => setOpen(false)}
             >
-              Atelier
+              Made to Order
             </Link>
             {!loading &&
               (user ? (
