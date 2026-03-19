@@ -1,6 +1,10 @@
-/** A single measurement record from the DB */
+/** A measurement record tied to a Shopify order */
 export interface MeasurementRecord {
   id: string;
+  /** Shopify order GID (e.g. gid://shopify/Order/123) */
+  shopify_order_id: string;
+  /** Human-readable order number (e.g. #1001) */
+  order_number: string;
   customer_email: string;
   customer_name: string;
   /** Pre-defined measurement values keyed by field key, all in inches */
