@@ -7,7 +7,7 @@ import ProductCard from './components/ProductCard';
 import VideoShowcase from './components/VideoShowcase';
 
 /** Pinned homepage collections — update handles here to change what's featured */
-const FEATURED_HANDLES = ['corsets', 'redefined-drapes-the-contemporary-edit', 'coord-sets'];
+const FEATURED_HANDLES = ['corsets', 'redefined-drapes-the-contemporary-edit', 'layered-fits'];
 
 async function getFeaturedCollections() {
   if (process.env.SHOPIFY_STORE_DOMAIN && process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN) {
