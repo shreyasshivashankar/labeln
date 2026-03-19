@@ -14,7 +14,7 @@ async function getFeaturedCollections() {
     const all = await getCollections(20);
     const pinned = FEATURED_HANDLES
       .map((h) => all.find((c) => c.handle === h))
-      .filter(Boolean);
+      .filter((c): c is NonNullable<typeof c> => c != null);
     return pinned.length > 0 ? pinned : all.slice(0, 3);
   }
   return mockCollections;
