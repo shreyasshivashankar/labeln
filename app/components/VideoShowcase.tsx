@@ -9,7 +9,6 @@ export default function VideoShowcase() {
     const video = videoRef.current;
     if (!video) return;
 
-    // Force play — some browsers block autoplay even when muted
     video.play().catch(() => {
       // Silently ignore if autoplay is blocked
     });
@@ -17,17 +16,24 @@ export default function VideoShowcase() {
 
   return (
     <section className="relative w-full overflow-hidden bg-black">
-      <video
-        ref={videoRef}
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-        className="w-full h-auto block"
-      >
-        <source src="/videos/showcase.mp4" type="video/mp4" />
-      </video>
+      {/*
+        Video is 9:16 portrait (1080x1920).
+        - Mobile: show full portrait, natural aspect ratio
+        - Desktop: crop to 16:9 landscape, video centered via object-cover
+      */}
+      <div className="md:h-[80vh] md:max-h-[900px]">
+        <video
+          ref={videoRef}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          className="w-full h-full block object-cover md:object-center"
+        >
+          <source src="/videos/showcase.mp4" type="video/mp4" />
+        </video>
+      </div>
     </section>
   );
 }
