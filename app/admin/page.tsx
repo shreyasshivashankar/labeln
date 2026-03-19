@@ -178,6 +178,7 @@ export default function AdminPage() {
     const key = toKey(label);
     if (measurements.some((m) => m.key === key)) return;
     setMeasurements((prev) => [...prev, { key, label, value: '' }]);
+    setValidationErrors([]);
     setNewFieldLabel('');
     setShowAddField(false);
     setShowCommonPicker(false);
@@ -188,12 +189,38 @@ export default function AdminPage() {
   };
 
   const updateMeasurementValue = (key: string, value: string) => {
-    setMeasurements((prev) => prev.map((m) => m.key === key ? { ...m, value } : m));
+    // Allow only digits, decimal point, and empty
+    const cleaned = value.replace(/[^0-9.]/g, '');
+    // Prevent multiple decimal points
+    const parts = cleaned.split('.');
+    const sanitized = parts.length > 2 ? parts[0] + '.' + parts.slice(1).join('') : cleaned;
+    setMeasurements((prev) => prev.map((m) => m.key === key ? { ...m, value: sanitized } : m));
   };
+
+  // Validation state
+  const [validationErrors, setValidationErrors] = useState<string[]>([]);
 
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!selectedRecord) return;
+
+    // Validate: every added measurement must have a valid number
+    const errors: string[] = [];
+    for (const m of measurements) {
+      const n = parseFloat(m.value);
+      if (!m.value.trim()) {
+        errors.push(`${m.label} is empty — enter a value or remove it.`);
+      } else if (isNaN(n) || n <= 0) {
+        errors.push(`${m.label} must be a positive number.`);
+      }
+    }
+
+    if (errors.length > 0) {
+      setValidationErrors(errors);
+      return;
+    }
+
+    setValidationErrors([]);
     setSaving(true);
     setSaveMsg('');
 
@@ -449,6 +476,17 @@ export default function AdminPage() {
             )}
           </div>
 
+          {validationErrors.length > 0 && (
+            <div className="mb-6 border border-red-200 bg-red-50 p-4">
+              <p className="text-red-700 text-[11px] font-medium uppercase tracking-[0.1em] mb-2">Please fix the following:</p>
+              <ul className="list-disc pl-4 space-y-1">
+                {validationErrors.map((err, i) => (
+                  <li key={i} className="text-red-600 text-xs">{err}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+
           {saveMsg && (
             <p className={`text-xs mb-6 ${saveMsg.startsWith('Error') ? 'text-red-600' : 'text-green-700'}`}>{saveMsg}</p>
           )}
@@ -466,12 +504,13 @@ export default function AdminPage() {
                     {editing ? (
                       <div className="flex items-center gap-2">
                         <input
-                          type="number"
-                          step="0.25"
-                          min="0"
+                          type="text"
+                          inputMode="decimal"
                           value={m.value}
                           onChange={(e) => updateMeasurementValue(m.key, e.target.value)}
-                          className="w-24 border border-border px-3 py-2 text-sm text-right focus:outline-none focus:border-primary"
+                          className={`w-24 border px-3 py-2 text-sm text-right focus:outline-none focus:border-primary ${
+                            validationErrors.some((err) => err.startsWith(m.label)) ? 'border-red-400' : 'border-border'
+                          }`}
                           placeholder="0"
                         />
                         <span className="text-text-secondary text-xs w-4">in</span>
