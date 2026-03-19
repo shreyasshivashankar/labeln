@@ -93,7 +93,7 @@ export default async function Home() {
           playsInline
           className="w-full h-auto block"
         >
-          <source src="/videos/showcase.mp4" type="video/mp4" />
+          <source src="/videos/showcase.mov" type="video/quicktime" />
         </video>
       </section>
 
