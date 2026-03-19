@@ -1,9 +1,10 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'About | Label N',
-  description: 'The story behind Label N — bespoke South Asian couture.',
+  description: 'The story behind Label N — bespoke South Asian couture by Nash & Anu.',
 };
 
 export default function AboutPage() {
@@ -16,32 +17,37 @@ export default function AboutPage() {
             Our Story
           </p>
           <h1 className="font-serif text-5xl md:text-6xl font-light mb-8">About Label N</h1>
-          <p className="font-serif text-xl md:text-2xl font-light text-text-secondary leading-relaxed">
-            A celebration of South Asian heritage reinterpreted for the modern wardrobe.
+          <p className="font-serif text-xl md:text-2xl font-light text-text-secondary leading-relaxed italic">
+            Where thread meets thought, and tradition finds tomorrow.
           </p>
         </div>
       </section>
 
-      {/* Story */}
+      {/* Story — poetic narrative */}
       <section className="py-24 md:py-32">
         <div className="max-w-2xl mx-auto px-6">
-          <div className="space-y-8 text-text-secondary text-sm leading-[1.9]">
+          <div className="space-y-10 text-text-secondary text-sm leading-[2]">
             <p>
-              Born from a desire to bridge tradition and contemporary aesthetics, Label N creates
-              garments that honor the artistry of South Asian craftsmanship while embracing the
-              sensibilities of a global citizen.
+              There is a quiet language in the way fabric falls — a whisper of hands that shaped it,
+              of stories stitched into every seam. Label N was born from that reverence. A belief that
+              the garments we wear should carry meaning, not just beauty.
             </p>
             <p>
-              Each piece is handcrafted using time-honored techniques — from delicate zardosi
-              embroidery to fine silk weaving — and finished with modern tailoring that moves with
-              your lifestyle. We work with master artisans across India and Pakistan to ensure that
-              every thread tells a story.
+              We draw from the deep well of South Asian craftsmanship — the delicate patience of
+              zardosi embroidery, the quiet rhythm of hand-loom silk, the warmth of generations passed
+              down through needle and thread. And we shape these traditions with a modern eye, creating
+              silhouettes that belong as much in the streets of New York as they do at a celebration
+              back home.
             </p>
             <p>
-              What truly sets Label N apart is our commitment to fit. We believe that couture should
-              not demand that you conform to it. Through our bespoke measurement process, every
-              garment is tailored precisely to your body, ensuring comfort, confidence, and elegance
-              in equal measure.
+              What we make is not fast. It is not mass-produced. Every Label N piece is made to your
+              exact measurements — because we believe that couture should never ask you to conform.
+              It should meet you where you are, and make you feel like the most considered version of
+              yourself.
+            </p>
+            <p>
+              This is clothing as conversation — between heritage and the everyday, between artisan
+              hands and the woman who wears their work. Between who you are and who you are becoming.
             </p>
           </div>
         </div>
@@ -73,8 +79,57 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* CTA */}
+      {/* Founders Letter */}
       <section className="py-24 md:py-32">
+        <div className="max-w-2xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <p className="text-[11px] font-medium uppercase tracking-[0.3em] text-secondary mb-6">
+              A Note from Us
+            </p>
+            <h2 className="font-serif text-3xl md:text-4xl font-light">From Our Hearts to Yours</h2>
+          </div>
+
+          <div className="space-y-8 text-text-secondary text-sm leading-[2] italic">
+            <p>
+              We started Label N with a simple dream — to create something that felt like home,
+              no matter where you wore it. Something that honored the hands that made it and the
+              woman who chose it.
+            </p>
+            <p>
+              Every collection is a love letter to the craft we grew up watching — our mothers&apos;
+              dupattas, our grandmothers&apos; embroidery, the way light catches silk just right.
+              We wanted to carry that forward, not as nostalgia, but as something alive and evolving.
+            </p>
+            <p>
+              Thank you for being part of this journey. When you wear Label N, you wear a piece
+              of our story — and we hope it becomes a beautiful part of yours.
+            </p>
+          </div>
+
+          {/* Founders Photo */}
+          <div className="mt-16 flex flex-col items-center">
+            <div className="relative w-64 h-80 mb-8">
+              <Image
+                src="/images/founders.jpg"
+                alt="Nash & Anu — Founders of Label N"
+                fill
+                className="object-cover"
+                sizes="256px"
+              />
+            </div>
+            <p className="font-serif text-2xl font-light tracking-wide">
+              Nash &amp; Anu
+            </p>
+            <p className="font-serif text-lg text-secondary mt-1">&hearts;</p>
+            <p className="text-[10px] uppercase tracking-[0.3em] text-text-secondary mt-3">
+              Founders, Label N
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="bg-surface py-24 md:py-32">
         <div className="max-w-2xl mx-auto px-6 text-center">
           <h2 className="font-serif text-3xl md:text-4xl font-light mb-10">
             Let&apos;s Create Something Beautiful

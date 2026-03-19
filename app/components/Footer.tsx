@@ -6,9 +6,9 @@ export default function Footer() {
   return (
     <footer className="border-t border-border">
       <div className="max-w-7xl mx-auto px-6 lg:px-12 py-16 md:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-12 md:gap-8">
           {/* Brand */}
-          <div className="md:col-span-1">
+          <div className="col-span-2 md:col-span-1">
             <Link href="/" className="font-logo text-xl tracking-[0.15em] font-normal">
               LABEL N
             </Link>
@@ -36,6 +36,80 @@ export default function Footer() {
             </ul>
           </div>
 
+          {/* Customer Services */}
+          <div>
+            <h4 className="text-[11px] font-medium uppercase tracking-[0.2em] mb-5">Customer Services</h4>
+            <ul className="space-y-3">
+              <li>
+                <Link href="/contact" className="text-text-secondary text-xs hover:text-primary transition-colors">
+                  Contact Us
+                </Link>
+              </li>
+              <li>
+                <Link href="/shipping" className="text-text-secondary text-xs hover:text-primary transition-colors">
+                  Shipping
+                </Link>
+              </li>
+              <li>
+                <Link href="/returns" className="text-text-secondary text-xs hover:text-primary transition-colors">
+                  Returns
+                </Link>
+              </li>
+              <li>
+                <Link href="/stockists" className="text-text-secondary text-xs hover:text-primary transition-colors">
+                  Stockists
+                </Link>
+              </li>
+              <li>
+                <Link href="/store-locator" className="text-text-secondary text-xs hover:text-primary transition-colors">
+                  Store Locator
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* The Brand */}
+          <div>
+            <h4 className="text-[11px] font-medium uppercase tracking-[0.2em] mb-5">The Brand</h4>
+            <ul className="space-y-3">
+              <li>
+                <Link href="/about" className="text-text-secondary text-xs hover:text-primary transition-colors">
+                  About
+                </Link>
+              </li>
+              <li>
+                <Link href="/faq" className="text-text-secondary text-xs hover:text-primary transition-colors">
+                  FAQ
+                </Link>
+              </li>
+              <li>
+                <Link href="/careers" className="text-text-secondary text-xs hover:text-primary transition-colors">
+                  Careers
+                </Link>
+              </li>
+              <li>
+                <Link href="/terms" className="text-text-secondary text-xs hover:text-primary transition-colors">
+                  Terms of Service
+                </Link>
+              </li>
+              <li>
+                <Link href="/privacy" className="text-text-secondary text-xs hover:text-primary transition-colors">
+                  Privacy Policy
+                </Link>
+              </li>
+              <li>
+                <Link href="/cookies" className="text-text-secondary text-xs hover:text-primary transition-colors">
+                  Cookies
+                </Link>
+              </li>
+              <li>
+                <Link href="/sitemap" className="text-text-secondary text-xs hover:text-primary transition-colors">
+                  Site Map
+                </Link>
+              </li>
+            </ul>
+          </div>
+
           {/* Get in Touch */}
           <div>
             <h4 className="text-[11px] font-medium uppercase tracking-[0.2em] mb-5">Get in Touch</h4>
@@ -49,18 +123,6 @@ export default function Footer() {
             >
               Contact Us
             </Link>
-          </div>
-
-          {/* The Brand */}
-          <div>
-            <h4 className="text-[11px] font-medium uppercase tracking-[0.2em] mb-5">The Brand</h4>
-            <ul className="space-y-3">
-              <li>
-                <Link href="/about" className="text-text-secondary text-xs hover:text-primary transition-colors">
-                  About
-                </Link>
-              </li>
-            </ul>
           </div>
         </div>
 
