@@ -76,6 +76,8 @@ export async function POST(request: NextRequest) {
     const { data, error } = await db
       .from('measurements')
       .update({
+        order_number: order_number || '',
+        customer_email: customer_email ? customer_email.toLowerCase() : '',
         customer_name: customer_name || null,
         status: status || 'pending_measurement',
         scheduled_date: scheduled_date || null,

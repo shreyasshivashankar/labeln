@@ -4,7 +4,8 @@ export type MeasurementStatus =
   | 'measurement_scheduled'
   | 'measured'
   | 'in_production'
-  | 'ready_to_ship';
+  | 'ready_to_ship'
+  | 'expired';
 
 export const STATUS_LABELS: Record<MeasurementStatus, string> = {
   pending_measurement: 'Pending Measurement',
@@ -12,9 +13,10 @@ export const STATUS_LABELS: Record<MeasurementStatus, string> = {
   measured: 'Measured',
   in_production: 'In Production',
   ready_to_ship: 'Ready to Ship',
+  expired: 'Expired',
 };
 
-/** Ordered list for the status workflow */
+/** Ordered list for the active status workflow (expired is separate) */
 export const STATUS_FLOW: MeasurementStatus[] = [
   'pending_measurement',
   'measurement_scheduled',
