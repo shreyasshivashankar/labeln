@@ -1,29 +1,29 @@
 export const mockCollections = [
   {
     id: '1',
-    title: 'Summer Collection',
-    handle: 'summer-collection',
+    title: 'Bridal',
+    handle: 'bridal',
     image: {
-      url: 'https://images.pexels.com/photos/1078983/pexels-photo-1078983.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-      altText: 'Summer Collection',
+      url: '/images/collection-bridal.jpg',
+      altText: 'Bridal Collection',
     },
   },
   {
     id: '2',
-    title: 'Wedding Collection',
-    handle: 'wedding-collection',
+    title: 'Festive',
+    handle: 'festive',
     image: {
-      url: 'https://images.pexels.com/photos/169198/pexels-photo-169198.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-      altText: 'Wedding Collection',
+      url: '/images/collection-festive.jpg',
+      altText: 'Festive Collection',
     },
   },
   {
     id: '3',
-    title: 'Festive Wear',
-    handle: 'festive-wear',
+    title: 'Contemporary',
+    handle: 'contemporary',
     image: {
-      url: 'https://images.pexels.com/photos/2253842/pexels-photo-2253842.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-      altText: 'Festive Wear',
+      url: '/images/collection-contemporary.jpg',
+      altText: 'Contemporary Collection',
     },
   },
 ];
@@ -31,11 +31,11 @@ export const mockCollections = [
 export const mockProducts = [
   {
     id: '1',
-    title: 'Elegant Blue Lehenga',
-    handle: 'elegant-blue-lehenga',
+    title: 'Silk Lehengga',
+    handle: 'silk-lehengga',
     priceRange: {
       minVariantPrice: {
-        amount: '150.00',
+        amount: '450.00',
         currencyCode: 'USD',
       },
     },
@@ -43,8 +43,8 @@ export const mockProducts = [
       edges: [
         {
           node: {
-            url: 'https://images.pexels.com/photos/1598505/pexels-photo-1598505.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-            altText: 'Elegant Blue Lehenga',
+            url: '/images/product-lehengga.jpg',
+            altText: 'Silk Lehengga',
           },
         },
       ],
@@ -52,11 +52,11 @@ export const mockProducts = [
   },
   {
     id: '2',
-    title: 'Golden Sherwani',
-    handle: 'golden-sherwani',
+    title: 'Embroidered Anarkali',
+    handle: 'embroidered-anarkali',
     priceRange: {
       minVariantPrice: {
-        amount: '250.00',
+        amount: '380.00',
         currencyCode: 'USD',
       },
     },
@@ -64,8 +64,8 @@ export const mockProducts = [
       edges: [
         {
           node: {
-            url: 'https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-            altText: 'Golden Sherwani',
+            url: '/images/product-anarkali.jpg',
+            altText: 'Embroidered Anarkali',
           },
         },
       ],
@@ -73,11 +73,11 @@ export const mockProducts = [
   },
   {
     id: '3',
-    title: 'Red Silk Saree',
-    handle: 'red-silk-saree',
+    title: 'Zardosi Saree Blouse',
+    handle: 'zardosi-saree-blouse',
     priceRange: {
       minVariantPrice: {
-        amount: '120.00',
+        amount: '280.00',
         currencyCode: 'USD',
       },
     },
@@ -85,20 +85,20 @@ export const mockProducts = [
       edges: [
         {
           node: {
-            url: 'https://images.pexels.com/photos/3756679/pexels-photo-3756679.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-            altText: 'Red Silk Saree',
+            url: '/images/product-saree-blouse.jpg',
+            altText: 'Zardosi Saree Blouse',
           },
         },
       ],
     },
   },
-    {
+  {
     id: '4',
-    title: 'Green Anarkali Suit',
-    handle: 'green-anarkali-suit',
+    title: 'Hand-Woven Kurta',
+    handle: 'hand-woven-kurta',
     priceRange: {
       minVariantPrice: {
-        amount: '180.00',
+        amount: '220.00',
         currencyCode: 'USD',
       },
     },
@@ -106,8 +106,8 @@ export const mockProducts = [
       edges: [
         {
           node: {
-            url: 'https://images.pexels.com/photos/3756679/pexels-photo-3756679.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-            altText: 'Green Anarkali Suit',
+            url: '/images/product-kurta.jpg',
+            altText: 'Hand-Woven Kurta',
           },
         },
       ],
