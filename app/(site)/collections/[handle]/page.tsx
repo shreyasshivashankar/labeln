@@ -4,7 +4,7 @@ import { getCollectionByHandle, getAllProducts } from '@/lib/shopify';
 import { mockCollections, mockProducts } from '@/lib/mock-data';
 import ProductCard from '@/app/components/ProductCard';
 
-const PRODUCTS_PER_PAGE = 25;
+const PRODUCTS_PER_PAGE = 24;
 
 async function getCollectionData(handle: string) {
   // "all" is a virtual collection showing every product
