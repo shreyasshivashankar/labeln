@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState } from 'react';
 import type { User, Session } from '@supabase/supabase-js';
-import { supabase } from '../../lib/supabase';
+import { getSupabase } from '../../lib/supabase';
 
 interface AuthContextValue {
   user: User | null;
@@ -32,6 +32,14 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let supabase;
+    try {
+      supabase = getSupabase();
+    } catch {
+      setLoading(false);
+      return;
+    }
+
     supabase.auth.getSession().then(({ data: { session: s } }) => {
       setSession(s);
       setUser(s?.user ?? null);
@@ -49,21 +57,33 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
   }, []);
 
   const signIn = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-    return { error: error?.message ?? null };
+    try {
+      const { error } = await getSupabase().auth.signInWithPassword({ email, password });
+      return { error: error?.message ?? null };
+    } catch (e) {
+      return { error: e instanceof Error ? e.message : 'Auth not configured' };
+    }
   };
 
   const signUp = async (email: string, password: string, name: string) => {
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: { data: { name } },
-    });
-    return { error: error?.message ?? null };
+    try {
+      const { error } = await getSupabase().auth.signUp({
+        email,
+        password,
+        options: { data: { name } },
+      });
+      return { error: error?.message ?? null };
+    } catch (e) {
+      return { error: e instanceof Error ? e.message : 'Auth not configured' };
+    }
   };
 
   const signOut = async () => {
-    await supabase.auth.signOut();
+    try {
+      await getSupabase().auth.signOut();
+    } catch {
+      // Auth not configured — silently ignore
+    }
   };
 
   return (

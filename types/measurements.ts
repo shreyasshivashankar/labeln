@@ -1,17 +1,19 @@
-export interface Measurements {
-  // Upper body
-  bust?: number;
-  waist?: number;
-  hips?: number;
-  shoulder?: number;
-  sleeveLength?: number;
-  // Lower body
-  height?: number;
-  inseam?: number;
-  // Garment-specific lengths
-  blouseLength?: number;
-  lehenggaLength?: number;
-  anarkaliLength?: number;
-  // Freeform notes set by team
-  notes?: string;
+/** A single measurement record from the DB */
+export interface MeasurementRecord {
+  id: string;
+  user_id: string;
+  /** Pre-defined measurement values keyed by field key, all in inches */
+  values: Record<string, number>;
+  /** Custom measurements added by Label N team (dress-type specific) */
+  custom_fields: CustomField[];
+  notes: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+/** A custom measurement field defined per client/dress type */
+export interface CustomField {
+  key: string;
+  label: string;
+  value: number | null;
 }

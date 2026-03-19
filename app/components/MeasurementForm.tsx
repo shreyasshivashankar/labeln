@@ -1,46 +1,17 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import type { Measurements } from '../../types/measurements';
+import type { MeasurementRecord } from '../../types/measurements';
+import { MEASUREMENT_TABS, MEASUREMENT_UNIT } from '../../lib/measurement-config';
 import { useAuth } from './AuthProvider';
 
 const CALENDLY_URL = process.env.NEXT_PUBLIC_CALENDLY_URL ?? 'https://calendly.com/labeln';
 
-const MEASUREMENT_GROUPS: {
-  label: string;
-  fields: { key: keyof Measurements; label: string; unit: string }[];
-}[] = [
-  {
-    label: 'Upper Body',
-    fields: [
-      { key: 'bust', label: 'Bust / Chest', unit: 'in' },
-      { key: 'waist', label: 'Waist', unit: 'in' },
-      { key: 'hips', label: 'Hips', unit: 'in' },
-      { key: 'shoulder', label: 'Shoulder Width', unit: 'in' },
-      { key: 'sleeveLength', label: 'Sleeve Length', unit: 'in' },
-    ],
-  },
-  {
-    label: 'Lower Body',
-    fields: [
-      { key: 'height', label: 'Height', unit: 'in' },
-      { key: 'inseam', label: 'Inseam', unit: 'in' },
-    ],
-  },
-  {
-    label: 'Garment Lengths',
-    fields: [
-      { key: 'blouseLength', label: 'Blouse Length', unit: 'in' },
-      { key: 'lehenggaLength', label: 'Lehengga Length', unit: 'in' },
-      { key: 'anarkaliLength', label: 'Anarkali / Suit Length', unit: 'in' },
-    ],
-  },
-];
-
 export default function MeasurementForm() {
   const { session } = useAuth();
-  const [measurements, setMeasurements] = useState<Measurements | null>(null);
+  const [record, setRecord] = useState<MeasurementRecord | null>(null);
   const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState(MEASUREMENT_TABS[0].id);
 
   useEffect(() => {
     if (!session) {
@@ -51,8 +22,8 @@ export default function MeasurementForm() {
     fetch('/api/measurements', {
       headers: { Authorization: `Bearer ${session.access_token}` },
     })
-      .then((r) => (r.ok ? (r.json() as Promise<Measurements>) : null))
-      .then((data) => setMeasurements(data))
+      .then((r) => (r.ok ? (r.json() as Promise<MeasurementRecord>) : null))
+      .then((data) => setRecord(data))
       .finally(() => setLoading(false));
   }, [session]);
 
@@ -66,7 +37,7 @@ export default function MeasurementForm() {
     );
   }
 
-  if (!measurements) {
+  if (!record) {
     return (
       <div className="bg-gray-50 p-8 rounded-lg text-center">
         <h2 className="text-2xl font-bold mb-3">Custom Measurements</h2>
@@ -86,6 +57,14 @@ export default function MeasurementForm() {
     );
   }
 
+  const hasCustom = record.custom_fields && record.custom_fields.length > 0;
+  const allTabs = [
+    ...MEASUREMENT_TABS,
+    ...(hasCustom ? [{ id: 'custom', label: 'Custom', fields: [] }] : []),
+  ];
+
+  const currentTab = allTabs.find((t) => t.id === activeTab) ?? allTabs[0];
+
   return (
     <div className="bg-gray-50 p-8 rounded-lg">
       <div className="flex justify-between items-start mb-6">
@@ -100,46 +79,72 @@ export default function MeasurementForm() {
         </a>
       </div>
 
-      <div className="space-y-8">
-        {MEASUREMENT_GROUPS.map((group) => (
-          <div key={group.label}>
-            <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-3">
-              {group.label}
-            </h3>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-              {group.fields.map(({ key, label, unit }) => {
-                const value = measurements[key];
-                return (
-                  <div key={key} className="bg-white p-4 rounded-lg border border-gray-100">
-                    <p className="text-xs text-gray-500 mb-1">{label}</p>
-                    <p className="font-semibold">
-                      {value !== undefined && value !== null ? (
-                        `${String(value)} ${unit}`
-                      ) : (
-                        <span className="text-gray-300 font-normal">&mdash;</span>
-                      )}
-                    </p>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
+      {/* Tabs */}
+      <div className="flex gap-1 border-b border-gray-200 mb-6 overflow-x-auto">
+        {allTabs.map((tab) => (
+          <button
+            key={tab.id}
+            onClick={() => setActiveTab(tab.id)}
+            className={`px-4 py-2 text-sm font-medium whitespace-nowrap border-b-2 transition-colors ${
+              activeTab === tab.id
+                ? 'border-primary text-primary'
+                : 'border-transparent text-gray-500 hover:text-gray-700'
+            }`}
+          >
+            {tab.label}
+          </button>
         ))}
-
-        {measurements.notes && (
-          <div>
-            <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-3">
-              Notes from your stylist
-            </h3>
-            <p className="bg-white p-4 rounded-lg border border-gray-100 text-sm text-gray-700">
-              {measurements.notes}
-            </p>
-          </div>
-        )}
       </div>
 
+      {/* Tab content */}
+      {currentTab.id === 'custom' ? (
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+          {record.custom_fields.map((field) => (
+            <div key={field.key} className="bg-white p-4 rounded-lg border border-gray-100">
+              <p className="text-xs text-gray-500 mb-1">{field.label}</p>
+              <p className="font-semibold">
+                {field.value !== null && field.value !== undefined ? (
+                  `${field.value} ${MEASUREMENT_UNIT}`
+                ) : (
+                  <span className="text-gray-300 font-normal">&mdash;</span>
+                )}
+              </p>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+          {currentTab.fields.map(({ key, label }) => {
+            const value = record.values[key];
+            return (
+              <div key={key} className="bg-white p-4 rounded-lg border border-gray-100">
+                <p className="text-xs text-gray-500 mb-1">{label}</p>
+                <p className="font-semibold">
+                  {value !== undefined && value !== null ? (
+                    `${value} ${MEASUREMENT_UNIT}`
+                  ) : (
+                    <span className="text-gray-300 font-normal">&mdash;</span>
+                  )}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {record.notes && (
+        <div className="mt-6">
+          <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-3">
+            Notes from your stylist
+          </h3>
+          <p className="bg-white p-4 rounded-lg border border-gray-100 text-sm text-gray-700">
+            {record.notes}
+          </p>
+        </div>
+      )}
+
       <p className="mt-8 text-xs text-gray-400 text-center">
-        Measurements are maintained by our team. Contact us to update any field.
+        All measurements in inches. Maintained by our team — contact us to update.
       </p>
     </div>
   );

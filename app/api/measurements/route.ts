@@ -13,7 +13,6 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: 'Database not configured' }, { status: 503 });
   }
 
-  // Verify the Supabase JWT and extract the user
   const {
     data: { user },
     error: authError,
@@ -26,16 +25,18 @@ export async function GET(request: NextRequest) {
   const { data, error } = await db
     .from('measurements')
     .select('*')
-    .eq('user_id', user.id);
+    .eq('user_id', user.id)
+    .order('updated_at', { ascending: false })
+    .limit(1);
 
-  if (error || !data) {
+  if (error) {
+    return NextResponse.json({ error: 'Failed to fetch measurements' }, { status: 500 });
+  }
+
+  const record = data?.[0];
+  if (!record) {
     return NextResponse.json({ error: 'Measurements not found' }, { status: 404 });
   }
 
-  const first = data[0];
-  if (!first) {
-    return NextResponse.json({ error: 'Measurements not found' }, { status: 404 });
-  }
-
-  return NextResponse.json(first);
+  return NextResponse.json(record);
 }
