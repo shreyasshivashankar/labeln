@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { unstable_cache } from 'next/cache';
 import { getProductByHandle } from '@/lib/shopify';
 import { mockProducts } from '@/lib/mock-data';
+import AddToCartButton from '../../components/AddToCartButton';
 
 async function getCachedProduct(handle: string) {
   const hasShopify = process.env.SHOPIFY_STORE_DOMAIN && process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN;
@@ -78,9 +79,12 @@ export default async function ProductPage({
               dangerouslySetInnerHTML={{ __html: product.descriptionHtml || product.description }}
             />
           )}
-          <button className="mt-8 px-8 py-3 bg-black text-white font-bold rounded-full hover:bg-gray-800">
-            Add to Cart
-          </button>
+          {(() => {
+            const variant = product.variants.edges[0]?.node;
+            return variant ? (
+              <AddToCartButton variantId={variant.id} availableForSale={variant.availableForSale} />
+            ) : null;
+          })()}
         </div>
       </div>
     </main>

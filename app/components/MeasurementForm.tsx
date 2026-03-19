@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import type { Measurements } from '../../lib/db';
+import type { Measurements } from '../../types/measurements';
+import { useAuth } from './AuthProvider';
 
 const CALENDLY_URL = process.env.NEXT_PUBLIC_CALENDLY_URL ?? 'https://calendly.com/labeln';
 
@@ -37,15 +38,23 @@ const MEASUREMENT_GROUPS: {
 ];
 
 export default function MeasurementForm() {
+  const { session } = useAuth();
   const [measurements, setMeasurements] = useState<Measurements | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/api/measurements')
+    if (!session) {
+      setLoading(false);
+      return;
+    }
+
+    fetch('/api/measurements', {
+      headers: { Authorization: `Bearer ${session.access_token}` },
+    })
       .then((r) => (r.ok ? (r.json() as Promise<Measurements>) : null))
       .then((data) => setMeasurements(data))
       .finally(() => setLoading(false));
-  }, []);
+  }, [session]);
 
   if (loading) {
     return (
@@ -107,7 +116,7 @@ export default function MeasurementForm() {
                       {value !== undefined && value !== null ? (
                         `${String(value)} ${unit}`
                       ) : (
-                        <span className="text-gray-300 font-normal">—</span>
+                        <span className="text-gray-300 font-normal">&mdash;</span>
                       )}
                     </p>
                   </div>

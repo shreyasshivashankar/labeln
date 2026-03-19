@@ -44,3 +44,37 @@ export interface ShopifyStorefrontResponse<T> {
   data: T;
   errors?: Array<{ message: string }>;
 }
+
+// ─── Cart ─────────────────────────────────────────────────────────────────────
+
+export interface ShopifyCart {
+  id: string;
+  checkoutUrl: string;
+  totalQuantity: number;
+  cost: {
+    totalAmount: { amount: string; currencyCode: string };
+    subtotalAmount: { amount: string; currencyCode: string };
+  };
+  lines: {
+    edges: Array<{
+      node: ShopifyCartLine;
+    }>;
+  };
+}
+
+export interface ShopifyCartLine {
+  id: string;
+  quantity: number;
+  merchandise: {
+    id: string;
+    title: string;
+    price: { amount: string; currencyCode: string };
+    product: {
+      title: string;
+      handle: string;
+      images: {
+        edges: Array<{ node: { url: string; altText: string | null } }>;
+      };
+    };
+  };
+}

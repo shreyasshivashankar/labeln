@@ -1,21 +1,34 @@
-import { getServerSession } from 'next-auth/next';
-import { authOptions } from '../auth/[...nextauth]/route';
-import { supabase } from '../../../lib/supabaseClient';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
+import { getAdminClient } from '../../../lib/supabaseAdmin';
 
-export async function GET() {
-  const session: { user?: { id?: string } } | null = await getServerSession(authOptions);
+export async function GET(request: NextRequest) {
+  const token = request.headers.get('authorization')?.replace('Bearer ', '');
 
-  if (!session?.user?.id) {
+  if (!token) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const { data, error } = await supabase
+  const db = getAdminClient();
+  if (!db) {
+    return NextResponse.json({ error: 'Database not configured' }, { status: 503 });
+  }
+
+  // Verify the Supabase JWT and extract the user
+  const {
+    data: { user },
+    error: authError,
+  } = await db.auth.getUser(token);
+
+  if (authError || !user) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
+  const { data, error } = await db
     .from('measurements')
     .select('*')
-    .eq('user_id', session.user.id);
+    .eq('user_id', user.id);
 
-  if (error || !data || data.length === 0) {
+  if (error || !data) {
     return NextResponse.json({ error: 'Measurements not found' }, { status: 404 });
   }
 
