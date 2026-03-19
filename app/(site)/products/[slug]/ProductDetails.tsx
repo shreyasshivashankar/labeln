@@ -145,19 +145,12 @@ export default function ProductDetails({ product }: Props) {
         </div>
       )}
 
-      {/* Product type & vendor */}
-      {(product.productType || product.vendor) && (
-        <div className="mt-8 pt-8 border-t border-border space-y-2">
-          {product.productType && (
-            <p className="text-[11px] text-text-secondary">
-              <span className="uppercase tracking-[0.15em]">Type:</span> {product.productType}
-            </p>
-          )}
-          {product.vendor && (
-            <p className="text-[11px] text-text-secondary">
-              <span className="uppercase tracking-[0.15em]">Brand:</span> {product.vendor}
-            </p>
-          )}
+      {/* Product type */}
+      {product.productType && (
+        <div className="mt-8 pt-8 border-t border-border">
+          <p className="text-[11px] text-text-secondary">
+            <span className="uppercase tracking-[0.15em]">Type:</span> {product.productType}
+          </p>
         </div>
       )}
     </div>
