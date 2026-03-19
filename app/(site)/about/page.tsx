@@ -55,23 +55,26 @@ export default function AboutPage() {
       {/* Values */}
       <section className="bg-surface py-14 md:py-20">
         <div className="max-w-5xl mx-auto px-6">
+          <p className="text-[11px] font-medium uppercase tracking-[0.3em] text-text-secondary text-center mb-10">
+            To provide an elegant experience for every occasion
+          </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 text-center">
             <div>
-              <p className="font-serif text-4xl font-light mb-3">100%</p>
+              <p className="font-serif text-4xl font-light mb-3">Pret</p>
               <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-text-secondary">
-                Made to Measure
+                Ready to Wear
               </p>
             </div>
             <div>
-              <p className="font-serif text-4xl font-light mb-3">Artisan</p>
+              <p className="font-serif text-4xl font-light mb-3">Couture</p>
               <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-text-secondary">
-                Handcrafted with Care
+                Bespoke Craftsmanship
               </p>
             </div>
             <div>
-              <p className="font-serif text-4xl font-light mb-3">Global</p>
+              <p className="font-serif text-4xl font-light mb-3">Made to Measure</p>
               <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-text-secondary">
-                Shipped Worldwide
+                Tailored to You
               </p>
             </div>
           </div>
