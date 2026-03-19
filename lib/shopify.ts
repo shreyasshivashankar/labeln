@@ -97,6 +97,7 @@ const productsQuery = `
           id
           handle
           title
+          tags
           priceRange {
             minVariantPrice { amount currencyCode }
           }
@@ -118,6 +119,16 @@ const collectionsQuery = `
           handle
           title
           image { url altText }
+          products(first: 20) {
+            edges {
+              node {
+                tags
+                images(first: 1) {
+                  edges { node { url altText } }
+                }
+              }
+            }
+          }
         }
       }
     }
@@ -138,6 +149,7 @@ const collectionByHandleQuery = `
             id
             handle
             title
+            tags
             priceRange {
               minVariantPrice { amount currencyCode }
             }
@@ -160,19 +172,40 @@ export async function getProductByHandle(handle: string) {
   return data.product;
 }
 
+/** Tag used to mark a product as a collection cover image */
+const COVER_TAG = 'collection-cover';
+
 export async function getProducts(first = 20) {
   const data = await shopifyFetch<{
     products: { edges: Array<{ node: ShopifyProduct }> };
-  }>(productsQuery, { first });
-  return data.products.edges.map((e) => e.node);
+  }>(productsQuery, { first: first + 10 });
+  return data.products.edges
+    .map((e) => e.node)
+    .filter((p) => !p.tags?.includes(COVER_TAG))
+    .slice(0, first);
 }
 
 export async function getCollections(first = 10) {
   const data = await shopifyFetch<{
-    collections: { edges: Array<{ node: ShopifyCollection }> };
+    collections: { edges: Array<{ node: ShopifyCollection & {
+      products: { edges: Array<{ node: { tags: string[]; images: { edges: Array<{ node: { url: string; altText: string | null } }> } } }> }
+    } }> };
   }>(collectionsQuery, { first: first + 5 });
   return data.collections.edges
-    .map((e) => e.node)
+    .map((e) => {
+      const col = e.node;
+      // Use collection-cover product image as the collection thumbnail
+      const coverProduct = col.products?.edges.find((p) =>
+        p.node.tags?.includes(COVER_TAG)
+      );
+      const coverImage = coverProduct?.node.images.edges[0]?.node;
+      return {
+        id: col.id,
+        handle: col.handle,
+        title: col.title,
+        image: coverImage ?? col.image,
+      };
+    })
     .filter((c) => c.handle !== 'frontpage')
     .slice(0, first);
 }
@@ -191,7 +224,9 @@ export async function getCollectionByHandle(handle: string, productsFirst = 20) 
 
   return {
     collection: data.collection,
-    products: data.collection.products.edges.map((e) => e.node),
+    products: data.collection.products.edges
+      .map((e) => e.node)
+      .filter((p) => !p.tags?.includes(COVER_TAG)),
   };
 }
 
